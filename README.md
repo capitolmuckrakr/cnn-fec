@@ -27,13 +27,13 @@ If you don't *really* need to deploy and maintain your own standalone campaign f
 1. add the following to your `$VIRTUAL_ENV/bin/postactivate`:
     ```bash
     export DJANGO_SETTINGS_MODULE=config.dev.settings
-    export fec_DB_NAME=fecproj
-    export fec_DB_USER=nyt_dev_fec
+    export fec_DB_NAME=cnn_digital_fec
+    export fec_DB_USER=cnn_digital_fec
     export FEC_API_KEY=your-api-key
     ```
 1. `pip install -r requirements.txt`
-1. `createuser -s nyt_dev_fec `
-1. `createdb -U nyt_dev_fec nyt_dev_fec`
+1. `createuser -s cnn_digital_fec `
+1. `createdb -U cnn_digital_fec cnn_digital_fec`
 1. `add2virtualenv . && add2virtualenv config && add2virtualenv fec`
 1. `django-admin migrate`
 

@@ -1,6 +1,6 @@
 Django==2.2
 psycopg2
-beautifulsoup4==4.6.0
+beautifulsoup4==4.7.1
 boto
 boto3
 datadog==0.21.0

@@ -27,7 +27,7 @@ If you don't *really* need to deploy and maintain your own standalone campaign f
 1. add the following to your `$VIRTUAL_ENV/bin/postactivate`:
     ```bash
     export DJANGO_SETTINGS_MODULE=config.dev.settings
-    export fec_DB_NAME=nyt_dev_fec
+    export fec_DB_NAME=fecproj
     export fec_DB_USER=nyt_dev_fec
     export FEC_API_KEY=your-api-key
     ```

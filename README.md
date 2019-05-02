@@ -19,7 +19,7 @@ The FEC website has been substantially improved recently, but it still lacks sev
 
 If you don't *really* need to deploy and maintain your own standalone campaign finance infrastructure, however, I recommend using tools developped by the FEC including their [site](https://www.fec.gov/data/?search=), their [api](https://api.open.fec.gov/developers/) or their [bulk data](https://classic.fec.gov/finance/disclosure/ftp_download.shtml). Or use ProPublica's [site](https://projects.propublica.org/itemizer/) or [api](https://www.propublica.org/datastore/api/campaign-finance-api).
 
-### Setup instructions
+### Setup instructions (updated for CNN fork)
 1. pull this repo
 1. `mkvirtualenv fec --python $(which python3)`
 1. get a FEC API key [here](https://api.data.gov/signup/)

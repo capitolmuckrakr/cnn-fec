@@ -224,7 +224,7 @@ def get_ie_results(request):
     candidate = request.GET.get('candidate')
     state = request.GET.get('state')
     district = request.GET.get('district')
-    cnn_district = request.GET.get('nyt_district')
+    cnn_district = request.GET.get('cnn_district')
     min_date = request.GET.get('min_date')
     max_date = request.GET.get('max_date')
 

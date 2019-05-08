@@ -245,8 +245,8 @@ def get_ie_results(request):
     if district:
         district = district.zfill(2)
         results = results.filter(candidate_district=district)
-    if nyt_district:
-        results = results.filter(nyt_district=nyt_district)
+    if cnn_district:
+        results = results.filter(cnn_district=cnn_district)
     if min_date:
         results = results.filter(expenditure_date__gte=min_date)
     if max_date:
@@ -281,8 +281,8 @@ def ies(request):
     page = request.GET.get('page')
     results = paginator.get_page(page)
     context = {'form': form, 'results':results, 'results_sum':results_sum, 'csv_url':csv_url}
-    if request.GET.get('nyt_district'):
-        context['nyt_district'] = True
+    if request.GET.get('cnn_district'):
+        context['cnn_district'] = True
         context['opts'] = ScheduleE._meta
 
     return render(request, '2020/ies.html', context)
@@ -305,11 +305,11 @@ def ie_csv(request):
 
 
 def races(request):
-    races = ScheduleE.objects.filter(active=True).values('nyt_district').annotate(Sum('expenditure_amount'))
+    races = ScheduleE.objects.filter(active=True).values('cnn_district').annotate(Sum('expenditure_amount'))
     
     order_by = request.GET.get('order_by', 'expenditure_amount')
     if order_by == 'race':
-        races = races.order_by('nyt_district')
+        races = races.order_by('cnn_district')
     else:
         races = races.order_by('-expenditure_amount__sum')
 

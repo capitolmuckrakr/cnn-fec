@@ -17,10 +17,10 @@ class BaseModel(models.Model):
         return self.__str__()
 
 class Donor(BaseModel):
-    nyt_name = models.CharField(max_length=255, null=True, blank=True)
-    nyt_employer = models.CharField(max_length=255, null=True, blank=True)
-    nyt_occupation = models.CharField(max_length=255, null=True, blank=True)
-    nyt_note = models.TextField(null=True, blank=True)
+    cnn_name = models.CharField(max_length=255, null=True, blank=True)
+    cnn_employer = models.CharField(max_length=255, null=True, blank=True)
+    cnn_occupation = models.CharField(max_length=255, null=True, blank=True)
+    cnn_note = models.TextField(null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     state = models.CharField(max_length=255, null=True, blank=True)
     contribution_total_2018 = models.DecimalField(max_digits=12,decimal_places=2, default=0)
@@ -33,4 +33,4 @@ class Donor(BaseModel):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.nyt_name
+        return self.cnn_name

@@ -12,7 +12,7 @@ class ScheduleEAdmin(admin.ModelAdmin):
                     'candidate_district',
                     'filing_id',
                     ]
-    fields = readonly_fields + ['nyt_district', 'active']
+    fields = readonly_fields + ['cnn_district', 'active']
 
 class ScheduleAAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
@@ -61,7 +61,7 @@ class ScheduleAAdmin(admin.ModelAdmin):
 
 
 class DonorAdmin(admin.ModelAdmin):
-    search_fields = ['nyt_name']
+    search_fields = ['cnn_name']
 
 class CandidateAdmin(admin.ModelAdmin):
     search_fields = ['name']

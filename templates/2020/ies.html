@@ -7,7 +7,7 @@
 
 <h2> Search for independent expenditures </h2>
 <div class="row">
-<form action="/2018/ies/" method="get">
+<form action="/2020/ies/" method="get">
     {{ form.as_p }}
     <input type="submit" value="Submit" />
 </form>
@@ -36,7 +36,7 @@
         <th> Purpose </th>
         <th> Candidate </th>
         <th> Race </th>
-        {% if nyt_district %} <th> Cleaned district </th> {% endif %}
+        {% if cnn_district %} <th> Cleaned district </th> {% endif %}
         <th> Support/Oppose</th>
         <th> Amount </th>
         <th> Date </th>
@@ -50,7 +50,7 @@
         <td>{{result.expenditure_purpose_descrip}}</td>
         <td>{{result.candidate_name}}</td>
         <td>{{result.district}}</td>
-        {% if nyt_district %} <td> {{result.nyt_district}} (<a href="{% url opts|admin_urlname:'change' result.id%}">edit</a>) </td> {% endif %}
+        {% if cnn_district %} <td> {{result.cnn_district}} (<a href="{% url opts|admin_urlname:'change' result.id%}">edit</a>) </td> {% endif %}
         <td>{{result.support}} </td>
         <td>${{result.expenditure_amount|floatformat:2|intcomma}}</td>
         <td>{{result.expenditure_date_formatted|date:"SHORT_DATE_FORMAT"}}</td>

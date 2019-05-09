@@ -17,8 +17,8 @@
     </tr>
     {% for result in results %}
     <tr>
-        <td> <a href="{%url 'donor:donor_details' result.id %}">{{result.nyt_name}}</a> </td>
-        <td> {{result.nyt_employer}} </td>
+        <td> <a href="{%url 'donor:donor_details' result.id %}">{{result.cnn_name}}</a> </td>
+        <td> {{result.cnn_employer}} </td>
         <td>
         {%if result.contribution_total_2020 > 0 %}
              ${{result.contribution_total_2020|floatformat:2|intcomma}}

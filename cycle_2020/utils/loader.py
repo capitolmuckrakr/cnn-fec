@@ -49,7 +49,7 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10):
             if fails >= max_fails:
                 logging.log(title="FEC download failed",
                     text='Failed to download valid JSON from FEC site {} times'.format(max_fails),
-                    tags=["nyt-fec", "result:fail"])
+                    tags=["cnn-fec", "result:fail"])
                 return None
             time.sleep(waittime)
         try:
@@ -59,7 +59,7 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10):
             if fails >= max_fails:
                 logging.log(title="FEC download failed",
                     text='Failed to download valid JSON from FEC site {} times'.format(max_fails),
-                    tags=["nyt-fec", "result:fail"])
+                    tags=["cnn-fec", "result:fail"])
                 return None
             time.sleep(waittime)
             continue
@@ -235,21 +235,21 @@ def load_itemizations(sked_model, skeds, debug=False):
                 state_exists = state is not None and state not in nulls
                 district_exists = district is not None and district not in nulls
                 if office == "P":
-                    line['nyt_district'] = "PRESIDENT"
+                    line['cnn_district'] = "PRESIDENT"
                 elif office_exists and state_exists and district_exists:
-                    line['nyt_district'] = "{}-{}".format(state,district)
+                    line['cnn_district'] = "{}-{}".format(state,district)
                 elif office == 'S':
                     if state_exists:
-                        line['nyt_district'] = "{}-SEN".format(state)
+                        line['cnn_district'] = "{}-SEN".format(state)
                     else:
-                        line['nyt_district'] = "UNKNOWN"
+                        line['cnn_district'] = "UNKNOWN"
                 elif state_exists:
                     if state in ['AK','DE','MT','ND','SD','VT','WY']:
-                        line['nyt_district'] = "{}-AT-LARGE".format(state)
+                        line['cnn_district'] = "{}-AT-LARGE".format(state)
                     else:
-                        line['nyt_district'] = "{}-HOUSE-UNKNOWN".format(state)
+                        line['cnn_district'] = "{}-HOUSE-UNKNOWN".format(state)
                 else:
-                    line['nyt_district'] = "UNKNOWN"
+                    line['cnn_district'] = "UNKNOWN"
 
             chunk.append(sked_model(**line))
             if len(chunk) >= chunk_size:
@@ -302,18 +302,18 @@ def reassign_standardized_donors(filing_id, amended_id):
         if len(new_trans) == 0:
             logging.log(title="donor reassignment issue",
                     text="filing {} was amended by filing {} and no transaction could be found for donor reassigment for transaction id {}".format(amended_id, filing_id, transaction_id),
-                    tags=["nyt-fec", "result:warning"])
+                    tags=["cnn-fec", "result:warning"])
             continue
         if len(new_trans) > 1:
             logging.log(title="donor reassignment issue",
                     text="filing {} was amended by filing {} and multiple transaction matches were found for {}".format(amended_id, filing_id, transaction_id),
-                    tags=["nyt-fec", "result:warning"])
+                    tags=["cnn-fec", "result:warning"])
             continue
         new_trans = new_trans[0]
         if new_trans.contributor_last_name != contributor_last_name:
             logging.log(title="donor reassignment issue",
                     text="Want to reassign transaction {} from filing {} to filing {} but last names mismatch: {}/{}".format(transaction_id, amended_id, filing_id, contributor_last_name, new_trans.contributor_last_name),    
-                    tags=["nyt-fec", "result:warning"])
+                    tags=["cnn-fec", "result:warning"])
             continue
 
         new_trans.donor = transaction.donor
@@ -470,7 +470,7 @@ def load_filing(filing, filename, filing_fieldnames):
     except Exception as e:
         logging.log(title="fec2json failed",
                     text="fec2json failed {} {}".format(filing, e),
-                    tags=["nyt-fec", "result:fail"])
+                    tags=["cnn-fec", "result:fail"])
         return False
 
     #do not load filings outside of this cycle (these will likely be amendments of old filings)
@@ -497,7 +497,7 @@ def load_filing(filing, filename, filing_fieldnames):
             #should be a warning or possibly critical
             logging.log(title="Filing {} Failed".format(filing),
                     text='Invalid amendment number {} for filing {}, creating filing and marking as FAILED\n'.format(filing_dict['amends_filing'],filing),
-                    tags=["nyt-fec", "result:fail"])
+                    tags=["cnn-fec", "result:fail"])
             filing_obj = Filing.objects.create(filing_id=filing, status='FAILED')
             filing_obj.save()
             return False
@@ -637,7 +637,7 @@ def load_filing(filing, filename, filing_fieldnames):
         ScheduleE.objects.filter(filing_id=filing).delete()
         logging.log(title="Itemization load failed",
                     text='Something failed in itemizations, marking {} as FAILED'.format(filing),
-                    tags=["nyt-fec", "result:fail"])
+                    tags=["cnn-fec", "result:fail"])
         return False
 
     if is_amended and amends_filing:
@@ -685,7 +685,7 @@ def load_filings(filing_dir):
         except:
             logging.log(title="Bad FEC filename",
                     text='did not recognize filing {}'.format(filename),
-                    tags=["nyt-fec", "result:warn"])
+                    tags=["cnn-fec", "result:warn"])
             continue
 
         full_filename = "{}{}".format(filing_dir, filename)
@@ -700,10 +700,10 @@ def load_filings(filing_dir):
 
             logging.log(title="Filing {} loaded".format(filing_id),
                     text='filing {} successfully loaded'.format(filing_id),
-                    tags=["nyt-fec", "result:success"])
+                    tags=["cnn-fec", "result:success"])
 
             filings_loaded += 1
 
     logging.log(title="FEC scrape completed".format(filing_id),
                     text='{} filings successfully loaded'.format(filings_loaded),
-                    tags=["nyt-fec", "result:success"])
+                    tags=["cnn-fec", "result:success"])

@@ -121,7 +121,7 @@ STATICFILES_LOCATION = 'apps/static'
 STATICFILES_STORAGE = 'utils.custom_storages.StaticStorage'
 STATIC_URL = "%s/" % STATICFILES_LOCATION
 
-MEDIAFILES_LOCATION = 'apps/fec/media'
+MEDIAFILES_LOCATION = 'apps/media'
 MEDIA_URL = "%s/" % MEDIAFILES_LOCATION
 DEFAULT_FILE_STORAGE = 'utils.custom_storages.MediaStorage'
 

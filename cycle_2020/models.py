@@ -739,6 +739,7 @@ class Candidate(BaseModel):
     district = models.CharField(max_length=23, null=True, blank=True)
     fec_candidate_id = models.CharField(max_length=9, null=True, blank=True)
     fec_committee_id = models.CharField(max_length=9, null=True, blank=True)
+    cnn_candidate_id = models.CharField(max_length=9, null=True, blank=True)
     party = models.CharField(max_length=1, null=True, blank=True)
     office = models.CharField(max_length=1, null=True, blank=True)
     note = models.CharField(max_length=255, null=True, blank=True)

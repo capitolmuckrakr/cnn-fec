@@ -462,7 +462,7 @@ def load_filing(filing, filename, filing_fieldnames):
             sys.stdout.write('filing {} already exists\n'.format(filing))
             return False
         else:
-            sys.stdout.write("Reloading {}, it failed perviously\n".format(filing))
+            sys.stdout.write("Reloading {}, it failed previously\n".format(filing))
     
     #filing does not exist or it failed previously
     try:
@@ -474,7 +474,7 @@ def load_filing(filing, filename, filing_fieldnames):
         return False
 
     #do not load filings outside of this cycle (these will likely be amendments of old filings)
-    #we check this before we download the filing, but this seems like worth re-checking in case someone manually downloaded a file or somehting
+    #we check this before we download the filing, but this seems like worth re-checking in case someone manually downloaded a file or something
     coverage_end = filing_dict.get('coverage_through_date')
     if not check_coverage_dates(filing_dict, coverage_end):
         #print('Not loading filings with end date {}'.format(coverage_end))

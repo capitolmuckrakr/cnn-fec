@@ -36,7 +36,7 @@ def filings(request):
     exclude_amendments = request.GET.get('exclude_amendments')
     min_date = request.GET.get('min_date')
     max_date = request.GET.get('max_date')
-    sort_order = request.GET.get('sort_order', '-created')
+    sort_order = request.GET.get('sort_order', '-filing_id')
     if comm:
         results = results.filter(committee_name__icontains=comm)
     if form_type:

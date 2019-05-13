@@ -55,7 +55,7 @@ def filings(request):
     paginator = Paginator(results, 50)
     page = request.GET.get('page')
     results = paginator.get_page(page)
-    return render(request, '2020/filings.html', {'form': form, 'results':results, 'opts': ScheduleA._meta})
+    return render(request, '2020/filings.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
 
 def get_contribution_results(request):
     comm = request.GET.get('committee')

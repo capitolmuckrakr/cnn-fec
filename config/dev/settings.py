@@ -121,7 +121,14 @@ AWS_S3_URL_PROTOCOL = 'http:'
 
 STATICFILES_LOCATION = 'apps/static'
 STATICFILES_STORAGE = 'utils.custom_storages.StaticStorage'
-STATIC_URL = "%s/" % STATICFILES_LOCATION
+# STATIC_URL = "%s/" % STATICFILES_LOCATION
+# URL prefix for static files.
+# Example: "http://example.com/static/", "http://static.example.com/"
+STATIC_URL = '/static/'
+
+# Additional locations of static files
+
+
 
 MEDIAFILES_LOCATION = 'apps/media'
 MEDIA_URL = "%s/" % MEDIAFILES_LOCATION

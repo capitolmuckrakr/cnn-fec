@@ -1,0 +1,798 @@
+/* CNN Sans: thin & extra light */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-thin.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-thin.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-thin.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-thin.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-thin.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-thin.svg?cnnsans-thin") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-thin.svgz?cnnsans-thin") format("svg");
+    font-weight: 200;
+    font-style: normal;
+}
+
+/* CNN Sans: light */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-light.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-light.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-light.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-light.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-light.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-light.svg?cnnsans-light") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-light.svgz?cnnsans-light") format("svg");
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* CNN Sans: regular */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-regular.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-regular.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-regular.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-regular.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-regular.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-regular.svg?cnnsans-regular") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-regular.svgz?cnnsans-regular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* CNN Sans: medium */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-medium.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-medium.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-medium.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-medium.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-medium.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-medium.svg?cnnsans-medium") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-medium.svgz?cnnsans-medium") format("svg");
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* CNN Sans: bold */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-bold.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-bold.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-bold.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-bold.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-bold.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-bold.svg?cnnsans-bold") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-bold.svgz?cnnsans-bold") format("svg");
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* CNN Sans: heavy */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-heavy.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-heavy.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-heavy.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-heavy.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-heavy.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-heavy.svg?cnnsans-heavy") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-heavy.svgz?cnnsans-heavy") format("svg");
+    font-weight: 800;
+    font-style: normal;
+}
+
+/* CNN Sans: black */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-black.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-black.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-black.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-black.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-black.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-black.svg?cnnsans-black") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-black.svgz?cnnsans-black") format("svg");
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* CNN Sans: thin italic */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-thinit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-thinit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-thinit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-thinit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-thinit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-thinit.svg?cnnsans-thinit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-thinit.svgz?cnnsans-thinit") format("svg");
+    font-weight: 200;
+    font-style: italic;
+}
+
+/* CNN Sans: light italic */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-lightit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-lightit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-lightit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-lightit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-lightit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-lightit.svg?cnnsans-lightit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-lightit.svgz?cnnsans-lightit") format("svg");
+    font-weight: 300;
+    font-style: italic;
+}
+
+/* CNN Sans: regular italic */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-italic.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-italic.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-italic.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-italic.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-italic.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-italic.svg?cnnsans-italic") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-italic.svgz?cnnsans-italic") format("svg");
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* CNN Sans: medium italic */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-mediumit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-mediumit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-mediumit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-mediumit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-mediumit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-mediumit.svg?cnnsans-mediumit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-mediumit.svgz?cnnsans-mediumit") format("svg");
+    font-weight: 500;
+    font-style: italic;
+}
+
+/* CNN Sans: bold italic */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-boldit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-boldit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-boldit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-boldit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-boldit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-boldit.svg?cnnsans-boldit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-boldit.svgz?cnnsans-boldit") format("svg");
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* CNN Sans: heavy italic */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-heavyit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-heavyit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-heavyit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-heavyit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-heavyit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-heavyit.svg?cnnsans-heavyit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-heavyit.svgz?cnnsans-heavyit") format("svg");
+    font-weight: 800;
+    font-style: italic;
+}
+
+/* CNN Sans: black italic */
+@font-face {
+    font-family: "CNN";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-blackit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-blackit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-blackit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-blackit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-blackit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-blackit.svg?cnnsans-blackit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-blackit.svgz?cnnsans-blackit") format("svg");
+    font-weight: 900;
+    font-style: italic;
+}
+
+/* CNN Condensed: light */
+@font-face {
+    font-family: "CNN Condensed";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedlight.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedlight.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedlight.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedlight.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedlight.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedlight.svg?cnnsans-condensedlight") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedlight.svgz?cnnsans-condensedlight") format("svg");
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* CNN Condensed: regular */
+@font-face {
+    font-family: "CNN Condensed";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-condensed.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-condensed.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensed.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensed.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensed.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensed.svg?cnnsans-condensed") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensed.svgz?cnnsans-condensed") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* CNN Condensed: medium */
+@font-face {
+    font-family: "CNN Condensed";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedmedium.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedmedium.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedmedium.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedmedium.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedmedium.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedmedium.svg?cnnsans-condensedmedium") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedmedium.svgz?cnnsans-condensedmedium") format("svg");
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* CNN Condensed: bold */
+@font-face {
+    font-family: "CNN Condensed";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedbold.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedbold.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedbold.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedbold.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedbold.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedbold.svg?cnnsans-condensedbold") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnsans-condensedbold.svgz?cnnsans-condensedbold") format("svg");
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* CNN Clock thin */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-thin.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-thin.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-thin.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-thin.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-thin.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-thin.svg?cnnclock-thin") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-thin.svgz?cnnclock-thin") format("svg");
+    font-weight: 200;
+    font-style: normal;
+}
+
+/* CNN Clock light */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-light.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-light.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-light.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-light.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-light.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-light.svg?cnnclock-light") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-light.svgz?cnnclock-light") format("svg");
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* CNN Clock regular */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-regular.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-regular.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-regular.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-regular.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-regular.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-regular.svg?cnnclock-regular") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-regular.svgz?cnnclock-regular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* CNN Clock medium */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-medium.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-medium.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-medium.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-medium.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-medium.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-medium.svg?cnnclock-medium") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-medium.svgz?cnnclock-medium") format("svg");
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* CNN Clock bold */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-bold.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-bold.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-bold.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-bold.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-bold.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-bold.svg?cnnclock-bold") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-bold.svgz?cnnclock-bold") format("svg");
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* CNN Clock heavy */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-heavy.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-heavy.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-heavy.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-heavy.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-heavy.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-heavy.svg?cnnclock-heavy") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-heavy.svgz?cnnclock-heavy") format("svg");
+    font-weight: 800;
+    font-style: normal;
+}
+
+/* CNN Clock black */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-black.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-black.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-black.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-black.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-black.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-black.svg?cnnclock-black") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-black.svgz?cnnclock-black") format("svg");
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* CNN Clock thin, italic */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-thinit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-thinit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-thinit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-thinit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-thinit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-thinit.svg?cnnclock-thinit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-thinit.svgz?cnnclock-thinit") format("svg");
+    font-weight: 200;
+    font-style: italic;
+}
+
+/* CNN Clock light, italic */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-lightit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-lightit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-lightit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-lightit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-lightit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-lightit.svg?cnnclock-lightit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-lightit.svgz?cnnclock-lightit") format("svg");
+    font-weight: 300;
+    font-style: italic;
+}
+
+/* CNN Clock regular, italic */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-italic.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-italic.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-italic.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-italic.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-italic.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-italic.svg?cnnclock-italic") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-italic.svgz?cnnclock-italic") format("svg");
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* CNN Clock medium, italic */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-mediumit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-mediumit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-mediumit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-mediumit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-mediumit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-mediumit.svg?cnnclock-mediumit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-mediumit.svgz?cnnclock-mediumit") format("svg");
+    font-weight: 500;
+    font-style: italic;
+}
+
+/* CNN Clock bold, italic */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-boldit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-boldit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-boldit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-boldit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-boldit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-boldit.svg?cnnclock-boldit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-boldit.svgz?cnnclock-boldit") format("svg");
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* CNN Clock heavy, italic */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-heavyit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-heavyit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-heavyit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-heavyit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-heavyit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-heavyit.svg?cnnclock-heavyit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-heavyit.svgz?cnnclock-heavyit") format("svg");
+    font-weight: 800;
+    font-style: italic;
+}
+
+/* CNN Clock black, italic */
+@font-face {
+    font-family: "CNN Clock";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-blackit.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnclock-blackit.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-blackit.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-blackit.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-blackit.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-blackit.svg?cnnclock-blackit") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnclock-blackit.svgz?cnnclock-blackit") format("svg");
+    font-weight: 900;
+    font-style: italic;
+}
+
+/* STYLE: regular */
+@font-face {
+    font-family: "STYLE";
+    src: url("//ix.cnn.io/static/fonts/latest/cnnstyle-regular.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnnstyle-regular.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnstyle-regular.woff2") format("woff2"),
+        url("//ix.cnn.io/static/fonts/latest/cnnstyle-regular.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnnstyle-regular.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnnstyle-regular.svg?cnnstyle-regular") format("svg"),
+        url("//ix.cnn.io/static/fonts/latest/cnnstyle-regular.svgz?cnnstyle-regular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* CNN Icons */
+@font-face {
+    font-family: "cnn-icons";
+    src: url("//ix.cnn.io/static/fonts/latest/cnn-icons.eot");
+    src: url("//ix.cnn.io/static/fonts/latest/cnn-icons.eot?#iefix") format("embedded-opentype"),
+        url("//ix.cnn.io/static/fonts/latest/cnn-icons.woff") format("woff"),
+        url("//ix.cnn.io/static/fonts/latest/cnn-icons.ttf") format("truetype"),
+        url("//ix.cnn.io/static/fonts/latest/cnn-icons.svg?#cnn-icons") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+
+html {
+	font-size: 14px;
+	font-family: "CNN", "CNN Sans Display", "CNN Sans", "Helvetica Neue", Helvetica, Utkal, Arial, sans-serif;
+	color: #262626;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: none;
+}
+
+body {
+	margin: 0;
+	padding-top: 25px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 0px;
+	background-color: #F2F2F2;
+}
+
+a:link,
+a:visited {
+	color: #262626;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #c00;
+}
+
+a:active {
+	color: #262626;
+}
+
+body.cnn-politics {
+	margin: 0;
+	padding: 0px;
+	background-color: #fefefe;
+}
+
+body.cnn-politics h1 {
+	font-size: 1.6em;
+	font-family: "CNN Condensed", "CNN", "CNN Sans Display", "CNN Sans", "Helvetica Neue", Helvetica, Utkal, Arial, sans-serif;
+	font-weight: 500;
+	text-rendering: optimizeLegibility;
+	font-feature-settings: "kern";
+	color: #404040;
+}
+
+body.cnn-politics h2 {
+	color: #262626;
+  font-family: "CNN Condensed", "CNN", "CNN Sans Display", "CNN Sans", "Helvetica Neue", Helvetica, Utkal, Arial, sans-serif;
+	font-weight: 500;
+	font-size: 32px;
+	letter-spacing: .01em;
+	margin-top: .25em;
+	line-height: 1.25em;
+}
+
+table {
+	border-collapse: collapse;
+	padding: 0;
+	font-size: 1em;
+	margin: 0 auto;
+}
+
+table thead {
+	color: #262626;
+}
+
+table thead tr {
+	border-bottom: 1px #404040 solid;
+}
+
+table th,
+table td {
+	padding: .6em .4em;
+	hyphens: none;
+}
+
+table td {
+	text-align: left;
+}
+
+table th {
+	vertical-align: bottom;
+	font-weight: bold;
+	font-size: 1em;
+	line-height: 1.25em;
+	letter-spacing: 0.01em;
+	-webkit-font-smoothing: antialiased;
+	font-weight: 400;
+	padding: .6em .4em .1em .4em;
+	text-align: center;
+}
+
+table tbody {
+	color: #737373;
+	letter-spacing: .02em;
+}
+
+table td {
+	border-bottom: none;
+	vertical-align: middle;
+	font-weight: 300;
+}
+
+th,
+td {
+	padding: .4em .4em;
+	text-align: left;
+}
+
+th {
+	vertical-align: bottom;
+	font-family: "CNN Condensed", "CNN", "CNN Sans Display", "CNN Sans", "Helvetica Neue", Helvetica, Utkal, Arial, sans-serif;
+	font-weight: 500;
+	line-height: 1.2;
+	-webkit-font-smoothing: antialiased;
+	background-color: #fff;
+	color: #404040;
+}
+
+td {
+	border-bottom: 1px solid #eee;
+	vertical-align: top;
+}
+
+th.amt,
+td.amt {
+	text-align: right;
+}
+
+tr.shadedrow {
+	background-color: #f1f1f1;
+	color: #333;
+	font-weight: bold;
+}
+
+table tr.shadedrow {
+	background-color: #f8f8f8;
+	color: #333;
+	font-weight: bold;
+}
+
+tbody tr {
+	border-bottom: 1px #D9D9D9 solid;
+}
+
+tbody>tr:last-child {
+	border-bottom: none;
+}
+
+table th.sort-header {
+	cursor: pointer;
+}
+
+table th.sort-header::-moz-selection,
+table th.sort-header::selection {
+	background: transparent;
+}
+
+table th.sort-header .sorter {
+	border-top: 2px solid #404040;
+	visibility: hidden;
+}
+
+table th.sort-header .sorter .icon {
+	content: '';
+	width: 1px;
+	margin: 3px auto 7px auto;
+	border-width: 0 4px 4px;
+	border-style: solid;
+	border-color: #404040 transparent;
+}
+
+table th.sort-header:hover .sorter {
+	visibility: visible;
+}
+
+table th.sort-up .sorter,
+table th.sort-down .sorter,
+table th.sort-down:hover .sorter {
+	visibility: visible;
+	opacity: 0.4;
+}
+
+table th.sort-up .sorter .icon {
+	border-bottom: none;
+	border-width: 4px 4px 0;
+}
+
+.hyphens {
+	hyphens: none;
+}
+
+.table-foot {
+	font-weight: 500;
+	padding: .4em;
+	font-family: "CNN", "CNN Sans Display", "CNN Sans", "Helvetica Neue", Helvetica, Utkal, Arial, sans-serif;
+	letter-spacing: .02em;
+}
+
+div.logo-links__cnn {
+  background-color: #c00;
+background-image: url(//www.i.cdn.cnn.com/.a/2.153.0/assets/logo_cnn.svg);
+float: left;
+height: 50px;
+width: 50px;
+}
+
+div.logo-links {
+  background-image: url(//www.i.cdn.cnn.com/.a/2.153.0/assets/logo_politics.svg);
+  background-position: 0;
+  background-repeat: no-repeat;
+  float: left;
+  height: 50px;
+  margin-left: .4rem;
+  width: 115px;
+}
+
+/* styles from NYT app */
+
+.container {
+  max-width: 970px;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .container > .navbar-header,
+  .container-fluid > .navbar-header,
+  .container > .navbar-collapse,
+  .container-fluid > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+.container:before,
+.container:after,
+.container-fluid:before,
+.container-fluid:after {
+  content: " ";
+  display: table;
+}
+
+.container:after,
+.container-fluid:after {
+  clear: both;
+}
+
+.nav {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+.nav > li {
+  position: relative;
+  display: block;
+}
+
+.nav > li:first-of-type {
+  padding-left: 2.75em;
+}
+
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  color: #cc0000;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li {
+      float: left;
+  }
+}
+
+.navbar-brand {
+    font-family: "CNN Condensed", "CNN", "CNN Sans Display", "CNN Sans", "Helvetica Neue", Helvetica, Utkal, Arial, sans-serif;
+    color: #1a1a1a;
+    display: inline-block;
+    line-height: 24px;
+    font-size: 26px;
+    font-weight: 300;
+    margin-left: 10px;
+    margin-top: 13px;
+}
+
+.navbar-header {
+    float: left;
+}
+
+.navbar-primary {
+    background-color: #fefefe;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 24px 0;
+}
+
+.navbar-left {
+    float: left !important;
+    margin: 0 0 0 2.75rem;
+}
+
+.navbar-default .navbar-bits {
+    font-family: "CNN Condensed", "CNN", "CNN Sans Display", "CNN Sans", "Helvetica Neue", Helvetica, Utkal, Arial, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin: 1em 0 0 2.75rem;
+}
+
+.text-muted {
+    color: #777777;
+}

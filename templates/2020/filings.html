@@ -32,7 +32,7 @@
         <td> <a href="{%url '2020:contributions'%}?filing_id={{filing.filing_id}}">${{filing.period_total_receipts|floatformat:2|intcomma}}</a>
             {% if filing.period_total_receipts > 99999 %}
                 (<a href="{% url opts|admin_urlname:'changelist' %}?q={{filing.filing_id}}">Link donors</a>)
-                
+
             {% endif %}
         </td>
         <td> <a href="{%url '2020:expenditures'%}?filing_id={{filing.filing_id}}">${{filing.period_total_disbursements|floatformat:2|intcomma}}</a> </td>
@@ -43,7 +43,7 @@
         {% else %}
           ${{filing.period_independent_expenditures|floatformat:2|intcomma}}
         {% endif %}
-        
+
     </a> </td>
     </tr>
     {% endfor %}
@@ -51,6 +51,6 @@
 
 {% include 'pagination.html' %}
 
-        
+
 
 {% endblock %}

@@ -1,0 +1,72 @@
+{% extends '2020/base.html' %}
+{% load humanize %}
+{% load admin_urls %}
+
+
+{% block content %}
+
+
+<h2> Search for filings </h2>
+<div class="row">
+<form action="/2020/filings/" method="get">
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+</div>
+
+<table class="table">
+    <tr>
+        <th> Name </th>
+        <th> Filing Type </th>
+        <th> Coverage Period</th>
+        <th> Individual<br/ >Contributions</th>
+        <th> Disbursements </th>
+        <th> Receipts </th>
+        <th> Itemized<br/ >Contributions</th>
+        <th> Unitemized<br/ >Contributions</th>
+        <th> Percent<br/ >Unitemized<br/ >of Total</th>
+        <th> Burn Rate </th>
+        <th> Cash </th>
+        <th> IEs </th>
+        <th> Filing date </th>
+    </tr>
+    {% for filing in results %}
+    <tr>
+        <td> <a href="{%url '2020:committee' filing.filer_id%}">{{filing.committee_name}}</a> </td>
+        <td> <a href="{{filing.url}}">{{filing.form}}</a> {% if filing.amends_filing %} (AMENDMENT) {% endif %} </td>
+        <td> {% if filing.coverage_from_date|length == 8 %} {{filing.coverage_from_date|slice:"4:6"}}/{{filing.coverage_from_date|slice:"6:8"}}/{{filing.coverage_from_date|slice:"0:4"}} {% else %} {{filing.coverage_from_date}}{%endif%} - 
+        {% if filing.coverage_through_date|length == 8 %} {{filing.coverage_through_date|slice:"4:6"}}/{{filing.coverage_through_date|slice:"6:8"}}/{{filing.coverage_through_date|slice:"0:4"}} {% else %} {{filing.coverage_through_date}}{%endif%}
+        
+        </td> 
+        <td>${{filing.period_individual_contribution_total|floatformat:2|intcomma}} </td>
+        <td> <a href="{%url '2020:expenditures'%}?filing_id={{filing.filing_id}}">${{filing.period_total_disbursements|floatformat:2|intcomma}}</a> </td>
+        <td> <a href="{%url '2020:contributions'%}?filing_id={{filing.filing_id}}">${{filing.period_total_receipts|floatformat:2|intcomma}}</a>
+            {% if filing.period_total_receipts > 99999 %}
+                (<a href="{% url opts|admin_urlname:'changelist' %}?q={{filing.filing_id}}">Link donors</a>)
+                
+            {% endif %}
+        </td>
+        <td> ${{filing.period_individuals_itemized|floatformat:2|intcomma}} </td>
+        <td> ${{filing.period_individuals_unitemized|floatformat:2|intcomma}} </td>
+        <td> {{filing.period_percent_unitemized|floatformat:1|intcomma}}% </td>
+        <td> {{filing.period_disbursements_div_receipts|floatformat:1|intcomma}}% </td>
+        <td> ${{filing.cash_on_hand_close_of_period|floatformat:2|intcomma}} </td>
+        <td> <a href="{%url '2020:ies'%}?filing_id={{filing.filing_id}}">
+        {% if filing.form == 'F24' %}
+          ${{filing.computed_ie_total_for_f24|floatformat:2|intcomma}}
+        {% else %}
+          ${{filing.period_independent_expenditures|floatformat:2|intcomma}}
+        {% endif %}
+        
+        
+    </a> </td>
+        <td> {% if filing.date_signed|length == 8 %} {{filing.date_signed|slice:"4:6"}}/{{filing.date_signed|slice:"6:8"}}/{{filing.date_signed|slice:"0:4"}} {% else %} {{filing.date_signed}}{%endif%}</td>   
+    </tr>
+    {% endfor %}
+</table>
+
+{% include 'pagination.html' %}
+
+        
+
+{% endblock %}

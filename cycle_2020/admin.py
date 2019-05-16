@@ -14,6 +14,24 @@ class ScheduleEAdmin(admin.ModelAdmin):
                     ]
     fields = readonly_fields + ['cnn_district', 'active']
 
+class CommitteeAdmin(admin.ModelAdmin):
+    ordering = ['committee_name']
+    readonly_fields = ['fec_id',
+                    'street_1',
+                    'street_2',
+                    'city',
+                    'state',
+                    'zipcode',
+                    'treasurer_last_name',
+                    'treasurer_first_name',
+                    'treasurer_middle_name',
+                    'treasurer_prefix',
+                    'treasurer_suffix',
+                    'committee_type',
+                    'committee_designation',
+                    ]
+    fields = readonly_fields + ['committee_name']
+    
 class ScheduleAAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -69,3 +87,4 @@ class CandidateAdmin(admin.ModelAdmin):
 admin.site.register(ScheduleA, ScheduleAAdmin)
 admin.site.register(ScheduleE, ScheduleEAdmin)
 admin.site.register(Candidate, CandidateAdmin)
+admin.site.register(Committee, CommitteeAdmin)

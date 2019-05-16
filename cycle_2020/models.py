@@ -39,6 +39,9 @@ class FilingStatus(models.Model):
     def csv_url(self):
         return 'http://docquery.fec.gov/csv/{}/{}.csv'.format(self.filing_id % 1000,self.filing_id)
     
+    def get_absolute_url(self):
+        return reverse('filingstatus_detail', args=[str(self.filing_id)])
+    
 class Committee(BaseModel):
     fec_id = models.CharField(max_length=10, primary_key=True)
     committee_name = models.CharField(max_length=255, blank=True, null=True)
@@ -58,6 +61,9 @@ class Committee(BaseModel):
 
     def __str__(self):
         return self.committee_name if self.committee_name else self.fec_id
+    
+    def get_absolute_url(self):
+        return reverse('committee_detail', args=[str(self.fec_id)])
 
     class Meta:
         indexes = [
@@ -274,6 +280,9 @@ class Filing(BaseModel):
             return "{} filing {}".format(self.committee_name, self.filing_id)
         else:
             return str(self.filing_id)
+        
+    def get_absolute_url(self):
+        return reverse('filing_detail', args=[str(self.filing_id)])
 
 
 
@@ -444,6 +453,9 @@ class ScheduleA(Transaction):
             else:
                 row.append(value)
         return(row)
+    
+    def get_absolute_url(self):
+        return reverse('schedulea_detail', args=[str(self.filing_id)])
 
     class Meta(Transaction.Meta):
         indexes = Transaction.Meta.indexes[:] #this is a deep copy to prevent the base model's fields from being overwritten
@@ -581,6 +593,9 @@ class ScheduleB(Transaction):
             else:
                 row.append(value)
         return(row)
+    
+    def get_absolute_url(self):
+        return reverse('scheduleb_detail', args=[str(self.filing_id)])
 
     class Meta(Transaction.Meta):
         indexes = Transaction.Meta.indexes[:] #this is a deep copy to prevent the base model's fields from being overwritten
@@ -751,6 +766,9 @@ class ScheduleE(Transaction):
             else:
                 row.append(value)
         return(row)
+    
+    def get_absolute_url(self):
+        return reverse('schedulee_detail', args=[str(self.filing_id)])
 
     class Meta(Transaction.Meta):
         indexes = Transaction.Meta.indexes[:] #this is a deep copy to prevent the base model's fields from being overwritten
@@ -785,6 +803,9 @@ class Candidate(BaseModel):
         except:
             return None
         return f
+    
+    def get_absolute_url(self):
+        return reverse('candidate_detail', args=[str(self.id)])
 
 class InauguralContrib(BaseModel):
     name = models.CharField(max_length=255, null=True, blank=True)
@@ -794,4 +815,7 @@ class InauguralContrib(BaseModel):
     zipcode = models.CharField(max_length=255, null=True, blank=True)
     date = models.CharField(max_length=255, null=True, blank=True)
     amount = models.DecimalField(max_digits=12,decimal_places=2, null=True, blank=True)
+    
+    def get_absolute_url(self):
+        return reverse('inauguralcontrib_detail', args=[str(self.id)])
 

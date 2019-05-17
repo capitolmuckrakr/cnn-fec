@@ -258,7 +258,7 @@ class Filing(BaseModel):
     def period_disbursements_div_receipts(self):
         receipts = self.period_total_receipts or 0
         disbursements = self.period_total_disbursements or 0
-        if disbursements > 0:
+        if receipts > 0:
             return (disbursements/receipts)*100
         else:
             return 0

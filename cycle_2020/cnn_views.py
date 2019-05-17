@@ -57,6 +57,37 @@ def summary(request):
     results = paginator.get_page(page)
     return render(request, '2020/summary_001.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
 
+def cyclesummary(request):
+    form = FilingForm(request.GET)
+    results = Filing.objects.filter(active=True)
+    
+    comm = request.GET.get('committee')
+    form_type = request.GET.get('form_type')
+    min_raised = request.GET.get('min_raised')
+    exclude_amendments = request.GET.get('exclude_amendments')
+    min_date = request.GET.get('min_date')
+    max_date = request.GET.get('max_date')
+    sort_order = request.GET.get('sort_order', '-filing_id')
+    if comm:
+        results = results.filter(committee_name__icontains=comm)
+    if form_type:
+        results = results.filter(form=form_type)
+    if min_raised:
+        results = results.filter(period_total_receipts__gte=min_raised)
+    if exclude_amendments:
+        results = results.filter(amends_filing=None)
+    if min_date:
+        results = results.filter(date_signed__gte=min_date)
+    if max_date:
+        results = results.filter(date_signed__lte=max_date)
+    if sort_order and sort_order.strip('-') in [f.name for f in Filing._meta.get_fields()]:
+        results = results.order_by(sort_order)
+
+    paginator = Paginator(results, 50)
+    page = request.GET.get('page')
+    results = paginator.get_page(page)
+    return render(request, '2020/cyclesummary_001.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
+
 def get_contribution_results(request):
     comm = request.GET.get('committee')
     filing_id = request.GET.get('filing_id')

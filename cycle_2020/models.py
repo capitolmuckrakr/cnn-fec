@@ -264,6 +264,15 @@ class Filing(BaseModel):
             return 0
     
     @property
+    def cycle_percent_unitemized(self):
+        unitemized = self.cycle_individuals_unitemized or 0
+        total_contribs = self.cycle_total_contributions or 0
+        if total_contribs > 0:
+            return (unitemized/total_contribs)*100
+        else:
+            return 0
+
+    @property
     def cycle_candidate_donations_plus_loans(self):
         contribs = self.cycle_candidate_contributions or 0
         loans = self.cycle_candidate_loans or 0
@@ -273,7 +282,10 @@ class Filing(BaseModel):
     def cycle_disbursements_div_receipts(self):
         receipts = self.cycle_total_receipts or 0
         disbursements = self.cycle_total_disbursements or 0
-        return disbursements/receipts
+        if receipts > 0:
+            return (disbursements/receipts)*100
+        else:
+            return 0
     
     def __str__(self):
         if self.committee_name:

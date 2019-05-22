@@ -24,7 +24,7 @@ class Echo:
         return value
 
 def index(request):
-    return render(request, '2020/index.html')
+    return render(request, '2020/index.html', { 'contact':settings.CONTACT})
 
 def filings(request):
     form = FilingForm(request.GET)
@@ -36,7 +36,7 @@ def filings(request):
     exclude_amendments = request.GET.get('exclude_amendments')
     min_date = request.GET.get('min_date')
     max_date = request.GET.get('max_date')
-    sort_order = request.GET.get('sort_order', '-created')
+    sort_order = request.GET.get('sort_order', '-filing_id')
     if comm:
         results = results.filter(committee_name__icontains=comm)
     if form_type:
@@ -55,7 +55,7 @@ def filings(request):
     paginator = Paginator(results, 50)
     page = request.GET.get('page')
     results = paginator.get_page(page)
-    return render(request, '2020/filings.html', {'form': form, 'results':results, 'opts': ScheduleA._meta})
+    return render(request, '2020/filings.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
 
 def get_contribution_results(request):
     comm = request.GET.get('committee')
@@ -105,7 +105,7 @@ def get_contribution_results(request):
 def contributions(request):
     form = ContributionForm(request.GET)
     if not request.GET:
-        return render(request, '2020/contributions.html', {'form': form})
+        return render(request, '2020/contributions.html', {'form': form,  'contact':settings.CONTACT})
 
     results = get_contribution_results(request)
 
@@ -118,7 +118,7 @@ def contributions(request):
     results = paginator.get_page(page)
 
     
-    return render(request, '2020/contributions.html', {'form': form, 'results':results, 'results_sum':results_sum, 'csv_url':csv_url})
+    return render(request, '2020/contributions.html', {'form': form, 'results':results, 'results_sum':results_sum, 'csv_url':csv_url, 'contact':settings.CONTACT})
 
 def contributions_csv(request):
     results = get_contribution_results(request)

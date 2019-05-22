@@ -18,7 +18,6 @@
     <tr>
         <th> Committee </th>
         <th> Filing Type </th>
-        <th> Import time </th>
         <th> Filing date </th>
         <th> Receipts </th>
         <th> Disbursements </th>
@@ -29,12 +28,11 @@
     <tr>
         <td> <a href="{%url '2020:committee' filing.filer_id%}">{{filing.committee_name}}</a> </td>
         <td> <a href="{{filing.url}}">{{filing.form}}</a> {% if filing.amends_filing %} (AMENDMENT) {% endif %} </td>
-        <td> {{filing.created}} </td>
         <td> {% if filing.date_signed|length == 8 %} {{filing.date_signed|slice:"4:6"}}/{{filing.date_signed|slice:"6:8"}}/{{filing.date_signed|slice:"0:4"}} {% else %} {{filing.date_signed}}{%endif%}</td>
         <td> <a href="{%url '2020:contributions'%}?filing_id={{filing.filing_id}}">${{filing.period_total_receipts|floatformat:2|intcomma}}</a>
             {% if filing.period_total_receipts > 99999 %}
                 (<a href="{% url opts|admin_urlname:'changelist' %}?q={{filing.filing_id}}">Link donors</a>)
-                
+
             {% endif %}
         </td>
         <td> <a href="{%url '2020:expenditures'%}?filing_id={{filing.filing_id}}">${{filing.period_total_disbursements|floatformat:2|intcomma}}</a> </td>
@@ -45,7 +43,7 @@
         {% else %}
           ${{filing.period_independent_expenditures|floatformat:2|intcomma}}
         {% endif %}
-        
+
     </a> </td>
     </tr>
     {% endfor %}
@@ -53,6 +51,6 @@
 
 {% include 'pagination.html' %}
 
-        
+
 
 {% endblock %}

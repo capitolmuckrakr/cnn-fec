@@ -113,13 +113,22 @@ USE_TZ = True
 AWS_S3_CALLING_FORMAT = ProtocolIndependentOrdinaryCallingFormat()
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', None)
-AWS_STORAGE_BUCKET_NAME = os.environ.get('fec_S3_BUCKET_NAME', 'AWS_STORAGE_BUCKET_NAME')
+#AWS_STORAGE_BUCKET_NAME = os.environ.get('fec_S3_BUCKET_NAME', 'AWS_STORAGE_BUCKET_NAME')
+AWS_STORAGE_BUCKET_NAME = 'cnn-digital-fec'
+AWS_S3_REGION_NAME = 'us-east-1'
 AWS_S3_SECURE_URLS = False
 AWS_S3_URL_PROTOCOL = 'http:'
 
 STATICFILES_LOCATION = 'apps/static'
 STATICFILES_STORAGE = 'utils.custom_storages.StaticStorage'
-STATIC_URL = "%s/" % STATICFILES_LOCATION
+# STATIC_URL = "%s/" % STATICFILES_LOCATION
+# URL prefix for static files.
+# Example: "http://example.com/static/", "http://static.example.com/"
+STATIC_URL = '/static/'
+
+# Additional locations of static files
+
+
 
 MEDIAFILES_LOCATION = 'apps/media'
 MEDIA_URL = "%s/" % MEDIAFILES_LOCATION

@@ -65,8 +65,6 @@ class FilingForm(forms.Form):
     exclude_amendments = forms.BooleanField(label='Exclude amendments', required=False)
     min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
     max_date = forms.DateField(label="Max filing date (YYYYMMDD)", required=False)
-    order_by = forms.ChoiceField(label="Sort field", choices=FILING_FORM_SORT_CHOICES, initial="FEC submission time", required=False)
-    order_direction = forms.ChoiceField(label='Sort direction', choices=DIRECTION_CHOICES, initial='descending', required=False)
 
 class InauguralForm(forms.Form):
     name = forms.CharField(label='Contributor name', max_length=500, required=False)

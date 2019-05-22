@@ -38,7 +38,7 @@ def filings(request):
     max_date = request.GET.get('max_date')
     sort_order = request.GET.get('sort_order', '-filing_id')
     if comm:
-        results = results.filter(committee_name__icontains=comm)
+        results = results.annotate(search=SearchVector('committee_name','filer_id'),).filter(search=comm)
     if form_type:
         results = results.filter(form=form_type)
     if min_raised:

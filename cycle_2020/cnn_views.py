@@ -4,7 +4,7 @@ import csv
 import time
 
 from django.shortcuts import render
-from django.db.models import Q, Sum, F
+from django.db.models import Q, Sum, F, Case
 from django.contrib.postgres.search import SearchQuery, SearchVector
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
@@ -49,7 +49,10 @@ def get_summary_results(request):
     order_direction = request.GET.get('order_direction', 'DESC')
     if order_by == 'period_disbursements_div_receipts':
         try:
-            results = results.annotate(ordering=F('period_total_disbursements') / F('period_total_receipts')).order_by('ordering')
+            results = results.annotate(
+                ordering=Case(
+                    When(period_total_receipts=0, then=0),
+                    default=F('period_total_disbursements') / F('period_total_receipts'))).order_by('ordering')
             if order_direction == "DESC":
                 results = results.reverse()
                 return results
@@ -57,7 +60,10 @@ def get_summary_results(request):
             return results
     elif order_by == 'period_percent_unitemized':
         try:
-            results = results.annotate(ordering=F('period_individuals_unitemized') / F('period_total_contributions')).order_by('ordering')
+            results = results.annotate(
+                ordering=Case(
+                    When(period_total_contributions=0, then=0),
+                    default=F('period_individuals_unitemized') / F('period_total_contributions'))).order_by('ordering')
             if order_direction == "DESC":
                 results = results.reverse()
                 return results

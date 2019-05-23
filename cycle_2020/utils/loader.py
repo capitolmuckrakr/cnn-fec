@@ -516,15 +516,15 @@ def load_filing(filing, filename, filing_fieldnames):
             else:
                 #if there are filings that were amended by the amended filing
                 #they also have to be deactivated, so look for them.
-                other_amended_filings = Filing.objects.filter(amends_filing=amended_filing.filing_id)
+                other_amended_filings = Filing.objects.filter(amends_filing=amended_filing.filing_id).exclude(filing_id__gte=filing)
                 amended_filings = [f for f in other_amended_filings] + [amended_filing]
                 for amended_filing in amended_filings:
                     amended_filing.active = False
                     amended_filing.status = 'SUPERSEDED'
                     amended_filing.save()
-                    ScheduleA.objects.filter(filing_id=amends_filing).update(active=False, status='SUPERSEDED')
-                    ScheduleB.objects.filter(filing_id=amends_filing).update(active=False, status='SUPERSEDED')
-                    ScheduleE.objects.filter(filing_id=amends_filing).update(active=False, status='SUPERSEDED')
+                    ScheduleA.objects.filter(filing_id=amended_filing.filing_id).update(active=False, status='SUPERSEDED')
+                    ScheduleB.objects.filter(filing_id=amended_filing.filing_id).update(active=False, status='SUPERSEDED')
+                    ScheduleE.objects.filter(filing_id=amended_filing.filing_id).update(active=False, status='SUPERSEDED')
 
     if filing_dict['form'] in ['F3','F3X','F3P','F5']:
         #could be a periodic, so see if there are covered forms that need to be deactivated

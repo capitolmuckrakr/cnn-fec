@@ -4,7 +4,7 @@ import csv
 import time
 
 from django.shortcuts import render
-from django.db.models import Q, Sum
+from django.db.models import Q, Sum, F
 from django.contrib.postgres.search import SearchQuery, SearchVector
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
@@ -26,32 +26,59 @@ class Echo:
 def index(request):
     return render(request, '2020/index.html', { 'contact':settings.CONTACT})
 
-def summary(request):
-    form = FilingForm(request.GET)
-    results = Filing.objects.filter(active=True)
-    
+def get_summary_results(request):
     comm = request.GET.get('committee')
     form_type = request.GET.get('form_type')
     min_raised = request.GET.get('min_raised')
-    exclude_amendments = request.GET.get('exclude_amendments')
     min_date = request.GET.get('min_date')
     max_date = request.GET.get('max_date')
-    sort_order = request.GET.get('sort_order', '-filing_id')
+    
+    results = Filing.objects.filter(active=True)
     if comm:
-        results = results.filter(committee_name__icontains=comm)
+        results = results.annotate(search=SearchVector('committee_name','filer_id'),).filter(search=comm)
     if form_type:
         results = results.filter(form=form_type)
     if min_raised:
         results = results.filter(period_total_receipts__gte=min_raised)
-    if exclude_amendments:
-        results = results.filter(amends_filing=None)
     if min_date:
         results = results.filter(date_signed__gte=min_date)
     if max_date:
         results = results.filter(date_signed__lte=max_date)
-    if sort_order and sort_order.strip('-') in [f.name for f in Filing._meta.get_fields()]:
-        results = results.order_by(sort_order)
 
+    order_by = request.GET.get('order_by', 'filing_id')
+    order_direction = request.GET.get('order_direction', 'DESC')
+    if order_by == 'period_disbursements_div_receipts':
+        try:
+            results = results.annotate(ordering=F('period_total_disbursements') / F('period_total_receipts')).order_by('ordering')
+            if order_direction == "DESC":
+                results = results.reverse()
+                return results
+        except:
+            return results
+    elif order_by == 'period_percent_unitemized':
+        try:
+            results = results.annotate(ordering=F('period_individuals_unitemized') / F('period_total_contributions')).order_by('ordering')
+            if order_direction == "DESC":
+                results = results.reverse()
+                return results
+        except:
+            return results
+    else:
+        results = results.order_by(order_by)
+    if order_direction == "DESC":
+        results = results.order_by('-{}'.format(order_by))
+    else:
+        results = results.order_by(order_by)
+    return results
+
+def summary(request):
+    form = SummaryForm(request.GET)
+    if not request.GET:
+        return render(request, '2020/summary_001.html', {'form': form, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
+    results = get_summary_results(request)
+    
+    #csv_url = reverse('2020:contributions_csv') + "?"+ request.GET.urlencode()
+    
     paginator = Paginator(results, 50)
     page = request.GET.get('page')
     results = paginator.get_page(page)

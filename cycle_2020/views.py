@@ -4,7 +4,7 @@ import csv
 import time
 
 from django.shortcuts import render
-from django.db.models import Q, Sum
+from django.db.models import Q, Sum, F
 from django.contrib.postgres.search import SearchQuery, SearchVector
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings

@@ -4,12 +4,15 @@ import datetime
 
 from django.conf import settings
 
-FILING_FORM_SORT_CHOICES = (
-    ('filing_id','FEC submission time'),
-    ('period_total_receipts','Receipts'),
+SUMMARY_FORM_SORT_CHOICES = (
+    ('filing_id','Filing date'),
+    ('period_individual_contribution_total','Individual contributions'),
     ('period_total_disbursements','Disbursements'),
+    ('period_total_receipts','Receipts'),
+    ('period_percent_unitemized','Percent unitemized'),
+    ('period_disbursements_div_receipts','Burn rate'),
     ('cash_on_hand_close_of_period','Cash'),
-    ('date_signed','Filing date')
+    ('period_independent_expenditures','Independent Expenditures')
 )
 
 DIRECTION_CHOICES = (('DESC','descending'),('ASC','ascending'))
@@ -65,6 +68,15 @@ class FilingForm(forms.Form):
     exclude_amendments = forms.BooleanField(label='Exclude amendments', required=False)
     min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
     max_date = forms.DateField(label="Max filing date (YYYYMMDD)", required=False)
+    
+class SummaryForm(forms.Form):
+    committee = forms.CharField(label='Committee name or ID', max_length=500, required=False)
+    form_type = forms.ChoiceField(label='Filer type', choices=FORM_TYPE_CHOICES, initial='Presidential (F3P)', required=False)
+    min_raised = forms.DecimalField(label='Minimum raised', required=False)
+    min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
+    max_date = forms.DateField(label="Max filing date (YYYYMMDD)", required=False)
+    order_by = forms.ChoiceField(label="Sort field", initial="Filing date", choices=SUMMARY_FORM_SORT_CHOICES, required=False)
+    order_direction = forms.ChoiceField(label='Sort direction', choices=DIRECTION_CHOICES, initial='descending', required=False)
 
 class InauguralForm(forms.Form):
     name = forms.CharField(label='Contributor name', max_length=500, required=False)

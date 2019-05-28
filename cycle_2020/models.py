@@ -287,6 +287,47 @@ class Filing(BaseModel):
         else:
             return 0
     
+    def export_fields():
+        return ['status',
+                'form_type',
+                'filer_id',
+                'committee_name',
+                'filing_id',
+                'amends_filing',
+                'coverage_from_date',
+                'coverage_through_date',
+                'cash_on_hand_close_of_period',
+                'period_total_receipts',
+                'period_total_disbursements',
+                'period_candidate_donations_plus_loans',
+                'period_individual_contribution_total',
+                'period_individuals_itemized',
+                'period_individuals_unitemized',
+                'period_percent_unitemized',
+                'period_disbursements_div_receipts',
+                'period_independent_expenditures',
+                'cycle_total_receipts',
+                'cycle_total_disbursements',
+                'cycle_candidate_donations_plus_loans',
+                'cycle_individual_contribution_total',
+                'cycle_individuals_itemized',
+                'cycle_individuals_unitemized',
+                'cycle_percent_unitemized',
+                'cycle_disbursements_div_receipts',
+                'cycle_independent_expenditures'
+                'date_signed',
+                ]
+
+    def csv_row(self):
+        row = []
+        for f in Filing.export_fields():
+            value = getattr(self, f)
+            if value is None:
+                row.append("")
+            else:
+                row.append(value)
+        return(row)
+
     def __str__(self):
         if self.committee_name:
             return "{} filing {}".format(self.committee_name, self.filing_id)

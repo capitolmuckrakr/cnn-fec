@@ -255,6 +255,12 @@ class Filing(BaseModel):
         return contribs+loans
 
     @property
+    def period_federal_transfers(self):
+        aff_trans = self.period_transfers_from_aff_other_party_cmttees or 0
+        auth_trans = self.period_transfers_from_authorized or 0
+        return aff_trans+auth_trans
+
+    @property
     def period_disbursements_div_receipts(self):
         receipts = self.period_total_receipts or 0
         disbursements = self.period_total_disbursements or 0
@@ -279,6 +285,12 @@ class Filing(BaseModel):
         return contribs+loans
 
     @property
+    def cycle_federal_transfers(self):
+        aff_trans = self.cycle_transfers_from_aff_other_party_cmttees or 0
+        auth_trans = self.cycle_transfers_from_authorized or 0
+        return aff_trans+auth_trans
+    
+    @property
     def cycle_disbursements_div_receipts(self):
         receipts = self.cycle_total_receipts or 0
         disbursements = self.cycle_total_disbursements or 0
@@ -294,12 +306,17 @@ class Filing(BaseModel):
                 'committee_name',
                 'filing_id',
                 'amends_filing',
+                'election_state',
+                'election_district',
                 'coverage_from_date',
                 'coverage_through_date',
+                'election_date',
                 'cash_on_hand_close_of_period',
+                'debts_by_summary',
                 'period_total_receipts',
                 'period_total_disbursements',
                 'period_candidate_donations_plus_loans',
+                'period_federal_transfers',
                 'period_individual_contribution_total',
                 'period_individuals_itemized',
                 'period_individuals_unitemized',
@@ -309,12 +326,13 @@ class Filing(BaseModel):
                 'cycle_total_receipts',
                 'cycle_total_disbursements',
                 'cycle_candidate_donations_plus_loans',
+                'cycle_federal_transfers',
                 'cycle_individual_contribution_total',
                 'cycle_individuals_itemized',
                 'cycle_individuals_unitemized',
                 'cycle_percent_unitemized',
                 'cycle_disbursements_div_receipts',
-                'cycle_independent_expenditures'
+                'cycle_independent_expenditures',
                 'date_signed',
                 ]
 

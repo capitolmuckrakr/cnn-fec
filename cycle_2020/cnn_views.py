@@ -81,14 +81,28 @@ def summary(request):
     form = SummaryForm(request.GET)
     results = get_summary_results(request)
     
-    #csv_url = reverse('2020:contributions_csv') + "?"+ request.GET.urlencode()
+    csv_url = reverse('2020:summary_csv') + "?"+ request.GET.urlencode()
     
     paginator = Paginator(results, 50)
     page = request.GET.get('page')
     results = paginator.get_page(page)
-    if not request.GET:
-        return render(request, '2020/summary_001.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
-    return render(request, '2020/summary_001.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
+    return render(request, '2020/summary_001.html', {'form': form, 'results':results, 'opts': ScheduleA._meta,'csv_url':csv_url, 'contact':settings.CONTACT})
+
+def summary_csv(request):
+    results = get_summary_results(request)
+    filename = "Summary_{}.csv".format(time.strftime("%Y%m%d-%H%M%S"))
+
+    def rows():
+        yield Filing.export_fields()
+        for result in results:
+            yield result.csv_row()
+
+    pseudo_buffer = Echo()
+    writer = csv.writer(pseudo_buffer)
+    response = StreamingHttpResponse((writer.writerow(row) for row in rows()),
+                                     content_type="text/csv")
+    response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+    return response
 
 def get_cycle_summary_results(request):
     comm = request.GET.get('committee')
@@ -144,15 +158,29 @@ def get_cycle_summary_results(request):
 def cycle_summary(request):
     form = CycleSummaryForm(request.GET)
     results = get_cycle_summary_results(request)
+    
+    csv_url = reverse('2020:cycle_summary_csv') + "?"+ request.GET.urlencode()
+    
     paginator = Paginator(results, 50)
     page = request.GET.get('page')
     results = paginator.get_page(page)
-    if not request.GET:
-        return render(request, '2020/cycle_summary.html', {'form': form, 'results':results,'opts': ScheduleA._meta, 'contact':settings.CONTACT})
-    
-    #csv_url = reverse('2020:contributions_csv') + "?"+ request.GET.urlencode()
-    
-    return render(request, '2020/cycle_summary.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
+    return render(request, '2020/cycle_summary.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'csv_url':csv_url,'contact':settings.CONTACT})
+
+def cycle_summary_csv(request):
+    results = get_cycle_summary_results(request)
+    filename = "Summary_{}.csv".format(time.strftime("%Y%m%d-%H%M%S"))
+
+    def rows():
+        yield Filing.export_fields()
+        for result in results:
+            yield result.csv_row()
+
+    pseudo_buffer = Echo()
+    writer = csv.writer(pseudo_buffer)
+    response = StreamingHttpResponse((writer.writerow(row) for row in rows()),
+                                     content_type="text/csv")
+    response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
+    return response
 
 def get_contribution_results(request):
     comm = request.GET.get('committee')

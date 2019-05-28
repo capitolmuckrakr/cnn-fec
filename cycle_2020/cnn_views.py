@@ -90,36 +90,69 @@ def summary(request):
     results = paginator.get_page(page)
     return render(request, '2020/summary_001.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
 
-def cyclesummary(request):
-    form = FilingForm(request.GET)
-    results = Filing.objects.filter(active=True)
-    
+def get_cycle_summary_results(request):
     comm = request.GET.get('committee')
     form_type = request.GET.get('form_type')
     min_raised = request.GET.get('min_raised')
-    exclude_amendments = request.GET.get('exclude_amendments')
     min_date = request.GET.get('min_date')
     max_date = request.GET.get('max_date')
-    sort_order = request.GET.get('sort_order', '-filing_id')
+    
+    results = Filing.objects.filter(active=True)
     if comm:
-        results = results.filter(committee_name__icontains=comm)
+        results = results.annotate(search=SearchVector('committee_name','filer_id'),).filter(search=comm)
     if form_type:
         results = results.filter(form=form_type)
     if min_raised:
-        results = results.filter(period_total_receipts__gte=min_raised)
-    if exclude_amendments:
-        results = results.filter(amends_filing=None)
+        results = results.filter(cycle_total_receipts__gte=min_raised)
     if min_date:
         results = results.filter(date_signed__gte=min_date)
     if max_date:
         results = results.filter(date_signed__lte=max_date)
-    if sort_order and sort_order.strip('-') in [f.name for f in Filing._meta.get_fields()]:
-        results = results.order_by(sort_order)
 
+    order_by = request.GET.get('order_by', 'filing_id')
+    order_direction = request.GET.get('order_direction', 'DESC')
+    if order_by == 'cycle_disbursements_div_receipts':
+        try:
+            results = results.annotate(
+                ordering=Case(
+                    When(cycle_total_receipts=0, then=0),
+                    default=F('cycle_total_disbursements') / F('cycle_total_receipts'))).order_by('ordering')
+            if order_direction == "DESC":
+                results = results.reverse()
+                return results
+        except:
+            return results
+    elif order_by == 'cycle_percent_unitemized':
+        try:
+            results = results.annotate(
+                ordering=Case(
+                    When(cycle_total_contributions=0, then=0),
+                    default=F('cycle_individuals_unitemized') / F('cycle_total_contributions'))).order_by('ordering')
+            if order_direction == "DESC":
+                results = results.reverse()
+                return results
+        except:
+            return results
+    else:
+        results = results.order_by(order_by)
+    if order_direction == "DESC":
+        results = results.order_by('-{}'.format(order_by))
+    else:
+        results = results.order_by(order_by)
+    return results
+
+def cyclesummary(request):
+    form = CycleSummaryForm(request.GET)
+    if not request.GET:
+        return render(request, '2020/cycle_summary.html', {'form': form, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
+    results = get_cycle_summary_results(request)
+    
+    #csv_url = reverse('2020:contributions_csv') + "?"+ request.GET.urlencode()
+    
     paginator = Paginator(results, 50)
     page = request.GET.get('page')
     results = paginator.get_page(page)
-    return render(request, '2020/cyclesummary_001.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
+    return render(request, '2020/cycle_summary.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
 
 def get_contribution_results(request):
     comm = request.GET.get('committee')

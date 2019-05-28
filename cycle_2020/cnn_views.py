@@ -97,7 +97,7 @@ def get_cycle_summary_results(request):
     min_date = request.GET.get('min_date')
     max_date = request.GET.get('max_date')
     
-    results = Filing.objects.filter(active=True)
+    results = Filing.objects.filter(active=True,period_total_contributions__gt=0)
     if comm:
         results = results.annotate(search=SearchVector('committee_name','filer_id'),).filter(search=comm)
     if form_type:
@@ -143,15 +143,15 @@ def get_cycle_summary_results(request):
 
 def cycle_summary(request):
     form = CycleSummaryForm(request.GET)
-    if not request.GET:
-        return render(request, '2020/cycle_summary.html', {'form': form, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
     results = get_cycle_summary_results(request)
-    
-    #csv_url = reverse('2020:contributions_csv') + "?"+ request.GET.urlencode()
-    
     paginator = Paginator(results, 50)
     page = request.GET.get('page')
     results = paginator.get_page(page)
+    if not request.GET:
+        return render(request, '2020/cycle_summary.html', {'form': form, 'results':results,'opts': ScheduleA._meta, 'contact':settings.CONTACT})
+    
+    #csv_url = reverse('2020:contributions_csv') + "?"+ request.GET.urlencode()
+    
     return render(request, '2020/cycle_summary.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
 
 def get_contribution_results(request):

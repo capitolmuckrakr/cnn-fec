@@ -346,7 +346,7 @@ def committee(request, committee_id):
 
 def candidates(request):
     deadline = request.GET.get('deadline')
-    candidates = Candidate.objects.order_by('office','state','district_number','party')
+    candidates = Candidate.objects.order_by('office','state','district_number',Lower('name'))
     candidates_with_filings = []
     for c in candidates:
         if deadline:

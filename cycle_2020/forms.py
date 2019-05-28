@@ -15,6 +15,17 @@ SUMMARY_FORM_SORT_CHOICES = (
     ('period_independent_expenditures','Independent Expenditures')
 )
 
+CYCLE_SUMMARY_FORM_SORT_CHOICES = (
+    ('filing_id','Filing date'),
+    ('cycle_individual_contribution_total','Individual contributions'),
+    ('cycle_total_disbursements','Disbursements'),
+    ('cycle_total_receipts','Receipts'),
+    ('cycle_percent_unitemized','Percent unitemized'),
+    ('cycle_disbursements_div_receipts','Burn rate'),
+    ('cash_on_hand_close_of_period','Cash'),
+    ('cycle_independent_expenditures','Independent Expenditures')
+)
+
 DIRECTION_CHOICES = (('DESC','descending'),('ASC','ascending'))
 
 FORM_TYPE_CHOICES = (
@@ -76,6 +87,15 @@ class SummaryForm(forms.Form):
     min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
     max_date = forms.DateField(label="Max filing date (YYYYMMDD)", required=False)
     order_by = forms.ChoiceField(label="Sort field", initial="Filing date", choices=SUMMARY_FORM_SORT_CHOICES, required=False)
+    order_direction = forms.ChoiceField(label='Sort direction', choices=DIRECTION_CHOICES, initial='descending', required=False)
+
+class CycleSummaryForm(forms.Form):
+    committee = forms.CharField(label='Committee name or ID', max_length=500, required=False)
+    form_type = forms.ChoiceField(label='Filer type', choices=FORM_TYPE_CHOICES, initial='Presidential (F3P)', required=False)
+    min_raised = forms.DecimalField(label='Minimum raised', required=False)
+    min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
+    max_date = forms.DateField(label="Max filing date (YYYYMMDD)", required=False)
+    order_by = forms.ChoiceField(label="Sort field", initial="Filing date", choices=CYCLE_SUMMARY_FORM_SORT_CHOICES, required=False)
     order_direction = forms.ChoiceField(label='Sort direction', choices=DIRECTION_CHOICES, initial='descending', required=False)
 
 class InauguralForm(forms.Form):

@@ -141,7 +141,7 @@ def get_cycle_summary_results(request):
         results = results.order_by(order_by)
     return results
 
-def cyclesummary(request):
+def cycle_summary(request):
     form = CycleSummaryForm(request.GET)
     if not request.GET:
         return render(request, '2020/cycle_summary.html', {'form': form, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})

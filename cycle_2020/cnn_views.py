@@ -79,8 +79,6 @@ def get_summary_results(request):
 
 def summary(request):
     form = SummaryForm(request.GET)
-    if not request.GET:
-        return render(request, '2020/summary_001.html', {'form': form, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
     results = get_summary_results(request)
     
     #csv_url = reverse('2020:contributions_csv') + "?"+ request.GET.urlencode()
@@ -88,6 +86,8 @@ def summary(request):
     paginator = Paginator(results, 50)
     page = request.GET.get('page')
     results = paginator.get_page(page)
+    if not request.GET:
+        return render(request, '2020/summary_001.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
     return render(request, '2020/summary_001.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'contact':settings.CONTACT})
 
 def get_cycle_summary_results(request):

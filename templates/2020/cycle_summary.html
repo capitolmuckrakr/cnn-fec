@@ -6,14 +6,15 @@
 {% block content %}
 
 
-<h2> Search for committee cycle totals 
+<h2> Search for totals by cycle </h2>
+<h3>
 {% if request.GET.urlencode %}
-<a href="{%url '2020:summary'%}?{{ request.GET.urlencode }}">(Repeat this search by period)
+<a href="{%url '2020:summary'%}?{{ request.GET.urlencode }}">(Repeat this search for totals by reporting period)
 {% else %}
-<a href="{%url '2020:summary'%}">(Search by Period)
+<a href="{%url '2020:summary'%}">(Search instead for totals by reporting period)
 {% endif %}
 </a>
-</h2>
+</h3>
 <div class="row">
 <form action="/2020/cycle_summary/" method="get">
     {{ form.as_p }}

@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.safestring import mark_safe
 
 import datetime
 
@@ -71,7 +72,6 @@ class IEForm(forms.Form):
     order_by = forms.ChoiceField(label="Sort field", initial="Expenditure Amount", choices=(('expenditure_amount', 'Expenditure Amount'),('expenditure_date', 'Expenditure Date')), required=False)
     order_direction = forms.ChoiceField(label='Sort direction', choices=DIRECTION_CHOICES, initial='descending', required=False)
 
-
 class FilingForm(forms.Form):
     committee = forms.CharField(label='Committee name or ID', max_length=500, required=False)
     form_type = forms.ChoiceField(label='Filer type', choices=FORM_TYPE_CHOICES, initial='Presidential (F3P)', required=False)
@@ -86,7 +86,7 @@ class SummaryForm(forms.Form):
     min_raised = forms.DecimalField(label='Minimum raised', required=False)
     min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
     max_date = forms.DateField(label="Max filing date (YYYYMMDD)", required=False)
-    cnn_committees = forms.BooleanField(label="Restrict to Saved Candidates", required=False)
+    cnn_committees = forms.BooleanField(label=mark_safe('Restrict to Saved Candidates (<a href="/admin/cycle_2020/candidate/">Add/Edit candidates list</a>)'), required=False) #This really belongs in the template, but WTH
     order_by = forms.ChoiceField(label="Sort field", initial="Filing date", choices=SUMMARY_FORM_SORT_CHOICES, required=False)
     order_direction = forms.ChoiceField(label='Sort direction', choices=DIRECTION_CHOICES, initial='descending', required=False)
 
@@ -96,7 +96,7 @@ class CycleSummaryForm(forms.Form):
     min_raised = forms.DecimalField(label='Minimum raised', required=False)
     min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
     max_date = forms.DateField(label="Max filing date (YYYYMMDD)", required=False)
-    cnn_committees = forms.BooleanField(label="Restrict to Saved Candidates", required=False)
+    cnn_committees = forms.BooleanField(label=mark_safe('Restrict to Saved Candidates (<a href="/admin/cycle_2020/candidate/">Add/Edit candidates list</a>)'), required=False) #This really belongs in the template, but WTH
     order_by = forms.ChoiceField(label="Sort field", initial="Filing date", choices=CYCLE_SUMMARY_FORM_SORT_CHOICES, required=False)
     order_direction = forms.ChoiceField(label='Sort direction', choices=DIRECTION_CHOICES, initial='descending', required=False)
 

@@ -86,6 +86,7 @@ class SummaryForm(forms.Form):
     min_raised = forms.DecimalField(label='Minimum raised', required=False)
     min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
     max_date = forms.DateField(label="Max filing date (YYYYMMDD)", required=False)
+    cnn_committees = forms.BooleanField(label="Restrict to Saved Candidates", required=False)
     order_by = forms.ChoiceField(label="Sort field", initial="Filing date", choices=SUMMARY_FORM_SORT_CHOICES, required=False)
     order_direction = forms.ChoiceField(label='Sort direction', choices=DIRECTION_CHOICES, initial='descending', required=False)
 
@@ -95,6 +96,7 @@ class CycleSummaryForm(forms.Form):
     min_raised = forms.DecimalField(label='Minimum raised', required=False)
     min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
     max_date = forms.DateField(label="Max filing date (YYYYMMDD)", required=False)
+    cnn_committees = forms.BooleanField(label="Restrict to Saved Candidates", required=False)
     order_by = forms.ChoiceField(label="Sort field", initial="Filing date", choices=CYCLE_SUMMARY_FORM_SORT_CHOICES, required=False)
     order_direction = forms.ChoiceField(label='Sort direction', choices=DIRECTION_CHOICES, initial='descending', required=False)
 

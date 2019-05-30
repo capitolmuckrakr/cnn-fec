@@ -166,7 +166,7 @@ def cycle_summary(request):
     results = get_cycle_summary_results(request)
     
     csv_url = reverse('2020:cycle_summary_csv') + "?"+ request.GET.urlencode()
-    period_summary_url = reverse('2020:summary') + "?"+ request.GET.urlencode()
+    period_summary_url = reverse('2020:summary') + "?"+ request.GET.urlencode().replace('cycle','period')
     
     paginator = Paginator(results, 50)
     page = request.GET.get('page')

@@ -8,7 +8,7 @@
 
 <h2> Search for totals by cycle </h2>
 <h3>
-{% if request.GET.urlencode %}
+{% if request.GET %}
 <a href="{%url '2020:summary'%}?{{ request.GET.urlencode }}">(Repeat this search for totals by reporting period)
 {% else %}
 <a href="{%url '2020:summary'%}">(Search instead for totals by reporting period)

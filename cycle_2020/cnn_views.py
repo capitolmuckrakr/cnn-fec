@@ -83,11 +83,12 @@ def summary(request):
     results = get_summary_results(request)
     
     csv_url = reverse('2020:summary_csv') + "?"+ request.GET.urlencode()
+    cycle_summary_url = reverse('2020:cycle_summary') + "?"+ request.GET.urlencode().replace('period','cycle')
     
     paginator = Paginator(results, 50)
     page = request.GET.get('page')
     results = paginator.get_page(page)
-    return render(request, '2020/summary_001.html', {'form': form, 'results':results, 'opts': ScheduleA._meta,'csv_url':csv_url, 'contact':settings.CONTACT})
+    return render(request, '2020/summary_001.html', {'form': form, 'results':results, 'opts': ScheduleA._meta,'csv_url':csv_url, 'cycle_summary_url':cycle_summary_url, 'contact':settings.CONTACT})
 
 def summary_csv(request):
     results = get_summary_results(request)
@@ -165,11 +166,12 @@ def cycle_summary(request):
     results = get_cycle_summary_results(request)
     
     csv_url = reverse('2020:cycle_summary_csv') + "?"+ request.GET.urlencode()
+    period_summary_url = reverse('2020:summary') + "?"+ request.GET.urlencode()
     
     paginator = Paginator(results, 50)
     page = request.GET.get('page')
     results = paginator.get_page(page)
-    return render(request, '2020/cycle_summary.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'csv_url':csv_url,'contact':settings.CONTACT})
+    return render(request, '2020/cycle_summary.html', {'form': form, 'results':results, 'opts': ScheduleA._meta, 'csv_url':csv_url, 'period_summary_url':period_summary_url, 'contact':settings.CONTACT})
 
 def cycle_summary_csv(request):
     results = get_cycle_summary_results(request)

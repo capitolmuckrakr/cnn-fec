@@ -23,9 +23,6 @@ class Echo:
         """Write the value by returning it, instead of storing in a buffer."""
         return value
 
-def index(request):
-    return render(request, '2020/index.html', { 'contact':settings.CONTACT})
-
 def get_summary_results(request):
     comm = request.GET.get('committee')
     form_type = request.GET.get('form_type')
@@ -51,9 +48,6 @@ def get_summary_results(request):
 
     order_by = request.GET.get('order_by', 'filing_id')
     order_direction = request.GET.get('order_direction', 'DESC')
-    if order_by.startswith('cycle'):
-        order_by = 'filing_id'
-        order_direction = 'DESC'
     if order_by == 'period_disbursements_div_receipts':
         try:
             results = results.annotate(
@@ -136,9 +130,6 @@ def get_cycle_summary_results(request):
 
     order_by = request.GET.get('order_by', 'filing_id')
     order_direction = request.GET.get('order_direction', 'DESC')
-    if order_by.startswith('period'):
-        order_by = 'filing_id'
-        order_direction = 'DESC'
     if order_by == 'cycle_disbursements_div_receipts':
         try:
             results = results.annotate(

@@ -554,6 +554,8 @@ def load_filing(filing, filename, filing_fieldnames):
     clean_filing_dict = clean_filing_fields(filing_dict, filing_fieldnames)
     clean_filing_dict['filing_id'] = filing
     clean_filing_dict['filer_id'] = filing_dict['filer_committee_id_number']
+    if filing_dict.get('committee_name') is None:
+        clean_filing_dict['committee_name'] =  filing_dict.get('organization_name')
     
     if len(filing_matches) == 1:
         filing_matches.update(**clean_filing_dict)

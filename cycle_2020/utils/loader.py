@@ -8,6 +8,7 @@ import traceback
 import sys
 import urllib3
 import lxml
+import itertools
 from decimal import Decimal
 from cycle_2020.utils import logging
 
@@ -554,9 +555,10 @@ def load_filing(filing, filename, filing_fieldnames):
     clean_filing_dict = clean_filing_fields(filing_dict, filing_fieldnames)
     clean_filing_dict['filing_id'] = filing
     clean_filing_dict['filer_id'] = filing_dict['filer_committee_id_number']
+    person_punc = [',','','']
+    person_namef = ['individual_last_name','individual_first_name','individual_middle_name']
     if filing_dict.get('committee_name') is None:
-        clean_filing_dict['committee_name'] =  filing_dict.get('organization_name')
-    
+        clean_filing_dict['committee_name'] =  filing_dict.get('organization_name') or " ".join([filing_dict.get(n,'')+p for n,p in zip(person_namef,person_punc)])
     if len(filing_matches) == 1:
         filing_matches.update(**clean_filing_dict)
         filing_obj = filing_matches[0]

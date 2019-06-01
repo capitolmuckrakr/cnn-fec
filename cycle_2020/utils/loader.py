@@ -447,7 +447,7 @@ def get_filer_name(filer_id):
             committee_designation=data['results'][0]['designation'],)
         comm.save()
     except:
-        pass
+        return None
     return data['results'][0]['name']
 
 def load_filing(filing, filename, filing_fieldnames):

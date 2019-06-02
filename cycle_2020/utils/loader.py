@@ -555,6 +555,8 @@ def load_filing(filing, filename, filing_fieldnames):
     clean_filing_dict = clean_filing_fields(filing_dict, filing_fieldnames)
     clean_filing_dict['filing_id'] = filing
     clean_filing_dict['filer_id'] = filing_dict['filer_committee_id_number']
+    if filing_dict['form'] == 'F5':
+        clean_filing_dict['period_independent_expenditures'] = filing_dict.get('total_independent_expenditure')
     person_punc = [',','','']
     person_namef = ['individual_last_name','individual_first_name','individual_middle_name']
     if filing_dict.get('committee_name') is None:

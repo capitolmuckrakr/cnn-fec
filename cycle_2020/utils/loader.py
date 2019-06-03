@@ -560,7 +560,7 @@ def load_filing(filing, filename, filing_fieldnames):
     person_punc = [',','','']
     person_namef = ['individual_last_name','individual_first_name','individual_middle_name']
     if filing_dict.get('committee_name') is None:
-        clean_filing_dict['committee_name'] =  filing_dict.get('organization_name') or " ".join([filing_dict.get(n,'')+p for n,p in zip(person_namef,person_punc)])
+        clean_filing_dict['committee_name'] =  filing_dict.get('organization_name') or " ".join([filing_dict.get(n)+p for n,p in zip(person_namef,person_punc) if filing_dict.get(n)])
     if len(filing_matches) == 1:
         filing_matches.update(**clean_filing_dict)
         filing_obj = filing_matches[0]

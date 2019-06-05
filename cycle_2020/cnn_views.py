@@ -126,32 +126,25 @@ def get_cycle_summary_results(request):
     order_direction = request.GET.get('order_direction', 'DESC')
     if order_by == 'cycle_disbursements_div_receipts':
         try:
-            results = results.annotate(
-                ordering=Case(
-                    When(cycle_total_receipts=0, then=0),
-                    default=F('cycle_total_disbursements') / F('cycle_total_receipts'))).order_by('ordering')
             if order_direction == "DESC":
-                results = results.reverse()
-                return results
+                results = sorted(results, key = lambda x: x.cycle_disbursements_div_receipts, reverse=True)
+            else:
+                results = sorted(results, key = lambda x: x.cycle_disbursements_div_receipts)
         except:
             return results
     elif order_by == 'cycle_percent_unitemized':
         try:
-            results = results.annotate(
-                ordering=Case(
-                    When(cycle_total_contributions=0, then=0),
-                    default=F('cycle_individuals_unitemized') / F('cycle_total_contributions'))).order_by('ordering')
             if order_direction == "DESC":
-                results = results.reverse()
-                return results
+                results = sorted(results, key = lambda x: x.cycle_percent_unitemized, reverse=True)
+            else:
+                results = sorted(results, key = lambda x: x.cycle_percent_unitemized)
         except:
             return results
     else:
-        results = results.order_by(order_by)
-    if order_direction == "DESC":
-        results = results.order_by('-{}'.format(order_by))
-    else:
-        results = results.order_by(order_by)
+        if order_direction == "DESC":
+            results = results.order_by('-{}'.format(order_by))
+        else:
+            results = results.order_by(order_by)
     return results
 
 def cycle_summary(request):

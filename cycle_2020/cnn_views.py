@@ -31,7 +31,7 @@ def get_summary_results(request):
     max_date = request.GET.get('max_date')
     cnn_committees = request.GET.get('cnn_committees')
     
-    results = Filing.objects.filter(active=True)
+    results = Filing.objects.filter(active=True,period_total_receipts__gt=0)
     if comm:
         results = results.annotate(search=SearchVector('committee_name','filer_id'),).filter(search=comm)
     if form_type:
@@ -50,32 +50,25 @@ def get_summary_results(request):
     order_direction = request.GET.get('order_direction', 'DESC')
     if order_by == 'period_disbursements_div_receipts':
         try:
-            results = results.annotate(
-                ordering=Case(
-                    When(period_total_receipts=0, then=0),
-                    default=F('period_total_disbursements') / F('period_total_receipts'))).order_by('ordering')
             if order_direction == "DESC":
-                results = results.reverse()
-                return results
+                results = sorted(results, key = lambda x: x.period_disbursements_div_receipts, reverse=True)
+            else:
+                results = sorted(results, key = lambda x: x.period_disbursements_div_receipts)
         except:
             return results
     elif order_by == 'period_percent_unitemized':
         try:
-            results = results.annotate(
-                ordering=Case(
-                    When(period_total_contributions=0, then=0),
-                    default=F('period_individuals_unitemized') / F('period_total_contributions'))).order_by('ordering')
             if order_direction == "DESC":
-                results = results.reverse()
-                return results
+                results = sorted(results, key = lambda x: x.period_percent_unitemized, reverse=True)
+            else:
+                results = sorted(results, key = lambda x: x.period_percent_unitemized)
         except:
             return results
     else:
-        results = results.order_by(order_by)
-    if order_direction == "DESC":
-        results = results.order_by('-{}'.format(order_by))
-    else:
-        results = results.order_by(order_by)
+        if order_direction == "DESC":
+            results = results.order_by('-{}'.format(order_by))
+        else:
+            results = results.order_by(order_by)
     return results
 
 def summary(request):

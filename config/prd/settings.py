@@ -19,9 +19,6 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['*']
 
-STATICFILES_STORAGE = 'utils.custom_storages.StaticStorage'
-DEFAULT_FILE_STORAGE = 'utils.custom_storages.MediaStorage'
-
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', None)
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', None)
@@ -33,6 +30,12 @@ AWS_QUERYSTRING_AUTH = False
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=600',
 }
+
+STATICFILES_LOCATION = AWS_STATIC_LOCATION
+MEDIAFILES_LOCATION = AWS_MEDIA_LOCATION
+
+STATICFILES_STORAGE = 'utils.custom_storages.StaticStorage'
+DEFAULT_FILE_STORAGE = 'utils.custom_storages.MediaStorage'
 
 STATIC_URL = f"https://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{AWS_STATIC_LOCATION}/"
 MEDIA_URL = f"https://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{AWS_MEDIA_LOCATION}/"

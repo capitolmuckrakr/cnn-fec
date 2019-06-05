@@ -30,6 +30,7 @@ CYCLE_SUMMARY_FORM_SORT_CHOICES = (
 DIRECTION_CHOICES = (('DESC','descending'),('ASC','ascending'))
 
 FORM_TYPE_CHOICES = (
+    ('all','All'),
     ('F3P','Presidential (F3P)'),
     ('F3','House or Senate (F3)'),
     ('F3X','PAC or Party (F3X)'),
@@ -74,7 +75,7 @@ class IEForm(forms.Form):
 
 class FilingForm(forms.Form):
     committee = forms.CharField(label='Committee name or ID', max_length=500, required=False)
-    form_type = forms.ChoiceField(label='Filer type', choices=FORM_TYPE_CHOICES, initial='Presidential (F3P)', required=False)
+    form_type = forms.ChoiceField(label='Filer type', choices=FORM_TYPE_CHOICES, initial='All', required=False)
     min_raised = forms.DecimalField(label='Minimum raised', required=False)
     exclude_amendments = forms.BooleanField(label='Exclude amendments', required=False)
     min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
@@ -82,7 +83,7 @@ class FilingForm(forms.Form):
     
 class SummaryForm(forms.Form):
     committee = forms.CharField(label='Committee name or ID', max_length=500, required=False)
-    form_type = forms.ChoiceField(label='Filer type', choices=FORM_TYPE_CHOICES, initial='Presidential (F3P)', required=False)
+    form_type = forms.ChoiceField(label='Filer type', choices=FORM_TYPE_CHOICES, initial='All)', required=False)
     min_raised = forms.DecimalField(label='Minimum raised', required=False)
     min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
     max_date = forms.DateField(label="Max filing date (YYYYMMDD)", required=False)
@@ -92,7 +93,7 @@ class SummaryForm(forms.Form):
 
 class CycleSummaryForm(forms.Form):
     committee = forms.CharField(label='Committee name or ID', max_length=500, required=False)
-    form_type = forms.ChoiceField(label='Filer type', choices=FORM_TYPE_CHOICES, initial='Presidential (F3P)', required=False)
+    form_type = forms.ChoiceField(label='Filer type', choices=FORM_TYPE_CHOICES, initial='All', required=False)
     min_raised = forms.DecimalField(label='Minimum raised', required=False)
     min_date = forms.CharField(label="Min filing date (YYYYMMDD)", required=False)
     max_date = forms.DateField(label="Max filing date (YYYYMMDD)", required=False)

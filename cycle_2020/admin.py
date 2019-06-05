@@ -77,12 +77,11 @@ class ScheduleAAdmin(admin.ModelAdmin):
                     'filing_id']
     fields = readonly_fields+autocomplete_fields
 
-
-class DonorAdmin(admin.ModelAdmin):
-    search_fields = ['cnn_name']
-
 class CandidateAdmin(admin.ModelAdmin):
     search_fields = ['name']
+    ordering = ('office','name')
+    list_filter = ('office','party','state','incumbent')
+    list_display = ('name','office','state','party','incumbent')
 
 admin.site.register(ScheduleA, ScheduleAAdmin)
 admin.site.register(ScheduleE, ScheduleEAdmin)

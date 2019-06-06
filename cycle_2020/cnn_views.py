@@ -31,7 +31,7 @@ def get_summary_results(request):
     max_date = request.GET.get('max_date')
     cnn_committees = request.GET.get('cnn_committees')
     
-    results = Filing.objects.filter(active=True,period_total_receipts__gt=0)
+    results = Filing.objects.filter(active=True)
     if comm:
         results = results.annotate(search=SearchVector('committee_name','filer_id'),).filter(search=comm)
     if form_type:
@@ -50,6 +50,7 @@ def get_summary_results(request):
     order_by = request.GET.get('order_by', 'filing_id')
     order_direction = request.GET.get('order_direction', 'DESC')
     if order_by == 'period_disbursements_div_receipts':
+        results = results.filter(period_total_receipts__gt=0)
         try:
             if order_direction == "DESC":
                 results = sorted(results, key = lambda x: x.period_disbursements_div_receipts, reverse=True)
@@ -58,6 +59,7 @@ def get_summary_results(request):
         except:
             return results
     elif order_by == 'period_percent_unitemized':
+        results = results.filter(period_total_contributions__gt=0)
         try:
             if order_direction == "DESC":
                 results = sorted(results, key = lambda x: x.period_percent_unitemized, reverse=True)
@@ -108,7 +110,7 @@ def get_cycle_summary_results(request):
     max_date = request.GET.get('max_date')
     cnn_committees = request.GET.get('cnn_committees')
     
-    results = Filing.objects.filter(active=True,period_total_contributions__gt=0)
+    results = Filing.objects.filter(active=True)
     if comm:
         results = results.annotate(search=SearchVector('committee_name','filer_id'),).filter(search=comm)
     if form_type:
@@ -127,6 +129,7 @@ def get_cycle_summary_results(request):
     order_by = request.GET.get('order_by', 'filing_id')
     order_direction = request.GET.get('order_direction', 'DESC')
     if order_by == 'cycle_disbursements_div_receipts':
+        results = results.filter(cycle_total_receipts__gt=0)
         try:
             if order_direction == "DESC":
                 results = sorted(results, key = lambda x: x.cycle_disbursements_div_receipts, reverse=True)
@@ -135,6 +138,7 @@ def get_cycle_summary_results(request):
         except:
             return results
     elif order_by == 'cycle_percent_unitemized':
+        results = results.filter(cycle_total_contributions__gt=0)
         try:
             if order_direction == "DESC":
                 results = sorted(results, key = lambda x: x.cycle_percent_unitemized, reverse=True)

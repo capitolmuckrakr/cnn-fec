@@ -1,3 +1,5 @@
+import dotenv
+dotenv.load_dotenv(dotenv.find_dotenv())
 import os
 from boto.s3.connection import ProtocolIndependentOrdinaryCallingFormat
 from datadog import initialize, api

@@ -1,3 +1,5 @@
+import dotenv
+dotenv.load_dotenv(dotenv.find_dotenv())
 import os
 
 from django.core.wsgi import get_wsgi_application

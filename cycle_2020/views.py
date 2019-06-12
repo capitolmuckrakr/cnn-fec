@@ -41,7 +41,8 @@ def filings(request):
     if comm:
         results = results.annotate(search=SearchVector('committee_name','filer_id'),).filter(search=comm)
     if form_type:
-        results = results.filter(form=form_type)
+        if not form_type == 'all':
+            results = results.filter(form=form_type)
     if min_raised:
         results = results.filter(period_total_receipts__gte=min_raised)
     if exclude_amendments:

@@ -188,7 +188,7 @@ def get_expenditure_results(request):
 def expenditures(request):
     form = ExpenditureForm(request.GET)
     if not request.GET:
-        return render(request, '2020/expenditures.html', {'form': form})
+        return render(request, '2020/expenditures.html', {'form': form, 'contact':settings.CONTACT})
 
     results = get_expenditure_results(request)    
 
@@ -200,7 +200,7 @@ def expenditures(request):
     page = request.GET.get('page')
     results = paginator.get_page(page)
 
-    return render(request, '2020/expenditures.html', {'form': form, 'results':results, 'results_sum':results_sum, 'csv_url':csv_url})
+    return render(request, '2020/expenditures.html', {'form': form, 'results':results, 'results_sum':results_sum, 'csv_url':csv_url, 'contact':settings.CONTACT})
 
 def expenditures_csv(request):
     results = get_expenditure_results(request)
@@ -271,7 +271,7 @@ def get_ie_results(request):
 def ies(request):
     form = IEForm(request.GET)
     if not request.GET:
-        return render(request, '2020/ies.html', {'form': form})
+        return render(request, '2020/ies.html', {'form': form, 'contact':settings.CONTACT})
 
     results = get_ie_results(request)
 
@@ -282,7 +282,7 @@ def ies(request):
     paginator = Paginator(results, 50)
     page = request.GET.get('page')
     results = paginator.get_page(page)
-    context = {'form': form, 'results':results, 'results_sum':results_sum, 'csv_url':csv_url}
+    context = {'form': form, 'results':results, 'results_sum':results_sum, 'csv_url':csv_url, 'contact':settings.CONTACT}
     if request.GET.get('cnn_district'):
         context['cnn_district'] = True
         context['opts'] = ScheduleE._meta
@@ -315,7 +315,7 @@ def races(request):
     else:
         races = races.order_by('-expenditure_amount__sum')
 
-    return render(request, '2020/races.html', {'races':races})
+    return render(request, '2020/races.html', {'races':races, 'contact':settings.CONTACT})
 
 def top_donors(request):
     donors = sorted(Donor.objects.all(), key=lambda d: d.contribution_total_2020, reverse=True)
@@ -330,6 +330,7 @@ def filing_status(request, status):
     context = {}
     status = status.upper()
     context['filings'] = FilingStatus.objects.filter(status=status).order_by('-created')
+    context['contact'] = settings.CONTACT
     return render(request, '2020/filing_status.html', context)
 
 def committee(request, committee_id):
@@ -356,7 +357,7 @@ def candidates(request):
             filing = c.most_recent_filing()
         candidates_with_filings.append((c,filing))
 
-    context = {'deadline':deadline, 'candidates':candidates_with_filings}
+    context = {'deadline':deadline, 'candidates':candidates_with_filings,'contact':settings.CONTACT}
     context['csv_url'] = reverse('2020:candidates_csv') + "?"+ request.GET.urlencode()
     return render(request, '2020/candidates.html', context)
 

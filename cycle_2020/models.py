@@ -875,8 +875,8 @@ class Candidate(BaseModel):
             return None
         return f
     
-    def get_absolute_url(self):
-        return reverse('candidate_detail', args=[str(self.id)])
+#    def get_absolute_url(self):
+#        return reverse('candidate_detail', args=[str(self.id)])
 
 class InauguralContrib(BaseModel):
     name = models.CharField(max_length=255, null=True, blank=True)

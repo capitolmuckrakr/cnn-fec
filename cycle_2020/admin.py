@@ -80,8 +80,8 @@ class ScheduleAAdmin(admin.ModelAdmin):
 class CandidateAdmin(admin.ModelAdmin):
     search_fields = ['name']
     ordering = ('office','name')
-    list_filter = ('office','party','state','incumbent')
-    list_display = ('name','office','state','party','incumbent')
+    list_filter = ('active','office','party','state','incumbent')
+    list_display = ('name','office','state','party','incumbent','active')
 
 admin.site.register(ScheduleA, ScheduleAAdmin)
 admin.site.register(ScheduleE, ScheduleEAdmin)

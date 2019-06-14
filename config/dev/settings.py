@@ -116,11 +116,17 @@ USE_TZ = True
 AWS_S3_CALLING_FORMAT = ProtocolIndependentOrdinaryCallingFormat()
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', None)
-#AWS_STORAGE_BUCKET_NAME = os.environ.get('fec_S3_BUCKET_NAME', 'AWS_STORAGE_BUCKET_NAME')
 AWS_STORAGE_BUCKET_NAME = 'cnn-digital-fec'
 AWS_S3_REGION_NAME = 'us-east-1'
 AWS_S3_SECURE_URLS = False
 AWS_S3_URL_PROTOCOL = 'http:'
+AWS_S3_CUSTOM_DOMAIN = "{}.s3.amazonaws.com".format(AWS_STORAGE_BUCKET_NAME)
+AWS_DEFAULT_ACL = 'public-read'
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=600',
+}
+
 
 STATICFILES_LOCATION = 'apps/static'
 STATICFILES_STORAGE = 'utils.custom_storages.StaticStorage'

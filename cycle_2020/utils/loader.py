@@ -194,7 +194,8 @@ def download_filings(filings, filing_dir="filings/"):
         if filename not in existing_filings:
             file_url = 'http://docquery.fec.gov/csv/{}/{}.csv'.format(str(filing)[-3:],filing)
             if os.path.isfile(filename):
-                sys.stdout.write("we already have filing {} downloaded\n".format(filing))
+                pass
+            #    sys.stdout.write("we already have filing {} downloaded\n".format(filing))
             else:
                 response = http.request('GET', file_url)
                 with open(filename,'wb') as f:

@@ -32,7 +32,7 @@
 </tr>
 {% for filing in periodic %}
 <tr>
-    <td> {{ filing.form_type }}</td>
+    <td class="text-right"> <a href="{{filing.url}}">{{ filing.form_type }}</a></td>
     <td> {{ filing.coverage_from_date }}</td>
     <td> {{ filing.coverage_through_date }}</td>
     <td class="text-right"> <a href="{%url '2020:contributions'%}?filing_id={{filing.filing_id}}">${{ filing.period_total_receipts|floatformat:2|intcomma }}</a></td>

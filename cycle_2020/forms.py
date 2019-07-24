@@ -13,7 +13,7 @@ SUMMARY_FORM_SORT_CHOICES = (
     ('period_percent_unitemized','Percent unitemized'),
     ('period_disbursements_div_receipts','Burn rate'),
     ('cash_on_hand_close_of_period','Cash'),
-    ('period_independent_expenditures','Independent Expenditures')
+    ('computed_ie_total_for_f24','Independent Expenditures (F24)')
 )
 
 CYCLE_SUMMARY_FORM_SORT_CHOICES = (

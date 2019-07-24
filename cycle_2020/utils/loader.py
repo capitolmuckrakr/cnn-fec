@@ -217,7 +217,7 @@ def load_itemizations(sked_model, skeds, debug=False):
         chunk = []
         for line in skeds:
             sked_count += 1
-            if line['form_type'].startswith('SB28'):
+            if line['form_type'].startswith('SB28') or line['form_type'].startswith('SB20'):
                 #these are refunds and should be processed as contribs
                 #we're going to create them individually to prevent trouble
                 refund = convert_refund_to_skeda(line)

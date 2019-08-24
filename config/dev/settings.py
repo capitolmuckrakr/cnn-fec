@@ -8,7 +8,7 @@ from datadog import initialize, api
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #this is a garbage secret key for dev, the actual key is set in env vars
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '++hv#e)wqd-as;dlkjf;sdkfljsfdg3499134mndfs!@^$-snmz+@m(&-g5e74&zg)+geh-xqe')
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [

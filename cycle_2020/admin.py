@@ -1,5 +1,6 @@
 from django.contrib import admin
 from cycle_2020.models import *
+import datetime
 
 class ScheduleEAdmin(admin.ModelAdmin):
     ordering = ['-expenditure_amount']
@@ -39,6 +40,11 @@ class ScheduleAAdmin(admin.ModelAdmin):
 
     def formatted_amount(self, obj):
         return '${:,.2f}'.format(obj.contribution_amount)
+    
+    def contribution_date_sorting(self, obj):
+        date_str = obj.contribution_date
+        y, m, d = int(date_str[:4]),int(date_str[4:6]),int(date_str[6:])
+        return datetime.date(y,m,d)
 
     def employer_occupation(self, obj):
         if obj.contributor_occupation and obj.contributor_employer:

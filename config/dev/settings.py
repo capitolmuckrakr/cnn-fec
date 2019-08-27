@@ -16,8 +16,13 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'default': {
-            # exact format is not important, this is the minimum information
+            'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        },
+        'verbose': {
             'format': '%(asctime)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s',
+        },
+        'simple': {
+            'format': '%(name)s - %(message)s',
         },
     },
     'handlers': {

@@ -1,6 +1,6 @@
 import dotenv
 dotenv.load_dotenv(dotenv.find_dotenv())
-import os
+import os, logging
 from boto.s3.connection import ProtocolIndependentOrdinaryCallingFormat
 from datadog import initialize, api
 
@@ -10,6 +10,43 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '++hv#e)wqd-as;dlkjf;sdkfljsfdg3499134mndfs!@^$-snmz+@m(&-g5e74&zg)+geh-xqe')
 DEBUG = False
 ALLOWED_HOSTS = ['*']
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'default': {
+            # exact format is not important, this is the minimum information
+            'format': '%(asctime)s - %(name)s - %(funcName)s - %(levelname)s - %(message)s',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'default'
+        },
+        'logfile': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'formatter': 'default',
+            'filename': os.path.join(
+                os.environ.get('HOME') + '/scripts/cnn-fec', 'django.log'),
+        },
+    },
+    'loggers': {
+        'cnn-fec': {
+            'handlers': ['console', 'logfile'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django.request': {
+            'handlers': ['console', 'logfile'],
+            'propagate': False,
+            'level': 'ERROR',  # WARN also shows 404 errors
+        },
+    }
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',

@@ -14,11 +14,13 @@ from cycle_2020.utils import loader
 
 from django.core.management.base import BaseCommand, CommandError
 
-import logging
+import logging, uuid
 
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 logger = logging.getLogger("cnn-fec."+__name__)
 logger.setLevel(LOGLEVEL)
+
+myid=uuid.uuid5(uuid.NAMESPACE_DNS, logger.name)
 
 class Command(BaseCommand):
 

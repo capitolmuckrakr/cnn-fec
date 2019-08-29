@@ -17,6 +17,7 @@ from django.core.management.base import BaseCommand, CommandError
 import logging, uuid
 
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
+SYSLOG_IDENTIFIER = os.environ.get('SYSLOG_IDENTIFIER','')
 logger = logging.getLogger("cnn-fec."+__name__)
 logger.setLevel(LOGLEVEL)
 
@@ -38,8 +39,9 @@ class Command(BaseCommand):
             filing_dir = os.environ.get('HOME') + '/scripts/cnn-fec/filings/'
 
         filings = unreadable_files_2020.recheck_existing_files(filing_dir)
+        x = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER,'TAGS':'cnn-fec, result:success'}
         if  len(filings) >0:
-            logger.warning("Found and deleted {} unreadable files".format(len(filings)))
+            logger.warning("Found and deleted {} unreadable files".format(len(filings)),extra=x)
 
         
         #loader.download_filings(filings, filing_dir)

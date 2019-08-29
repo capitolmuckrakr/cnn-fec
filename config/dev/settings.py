@@ -32,11 +32,11 @@ LOGGING = {
             'formatter': 'default'
         },
         'logfile': {
-            'level': 'INFO',
+            'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'formatter': 'default',
+            'formatter': 'verbose',
             'filename': os.path.join(
-                os.environ.get('HOME') + '/scripts/cnn-fec', 'django.log'),
+                os.environ.get('HOME') + '/scripts/cnn-fec', 'django_errors.log'),
         },
     },
     'loggers': {
@@ -52,6 +52,18 @@ LOGGING = {
         },
     }
 }
+
+if "SYSLOG_IDENTIFIER" in os.environ:
+    try:
+        from systemd import journal
+
+        LOGGING["formatters"]["default"] = {"format": "%(message)s"}
+        LOGGING["handlers"]["console"] = {
+            "class": "systemd.journal.JournalHandler",
+            "SYSLOG_IDENTIFIER": os.getenv("SYSLOG_IDENTIFIER"),
+        }
+    except ImportError:
+        pass
 
 INSTALLED_APPS = [
     'django.contrib.admin',

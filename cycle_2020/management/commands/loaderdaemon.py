@@ -14,11 +14,16 @@ from cycle_2020.utils import loader
 
 from django.core.management.base import BaseCommand, CommandError
 
-import logging
+import logging, uuid
 
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
-daemonlogger = logging.getLogger("cnn-fec."+__name__)
-daemonlogger.setLevel(LOGLEVEL)
+SYSLOG_IDENTIFIER = os.environ.get('SYSLOG_IDENTIFIER','')
+logger = logging.getLogger("cnn-fec."+__name__)
+logger.setLevel(LOGLEVEL)
+
+myid=uuid.uuid4()
+
+myextra = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER}
 
 class Command(BaseCommand):
 
@@ -41,13 +46,13 @@ class Command(BaseCommand):
         else:
             filing_dir = 'filings/'
 
-        daemonlogger.info("looking for filings for period {}-{}".format(start_date, end_date))
-        filings = loader.get_filing_list(start_date, end_date)
+        logger.info("looking for filings for period {}-{}".format(start_date, end_date), extra=myextra)
+        filings = loader.get_filing_list(start_date, end_date, extra=myextra)
         if not filings:
-            daemonlogger.warning("failed to find any filings for period {}-{}".format(start_date, end_date))
+            logger.warning("failed to find any filings for period {}-{}".format(start_date, end_date), extra=myextra)
 
         
-        #loader.download_filings(filings, filing_dir)
-        #loader.load_filings(filing_dir)
+        #loader.download_filings(filings, filing_dir, extra=myextra)
+        #loader.load_filings(filing_dir,extra=myextra)
 
 

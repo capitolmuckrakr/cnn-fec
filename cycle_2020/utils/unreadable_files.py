@@ -70,7 +70,7 @@ def reset_refused_filing_to_failed(filing_id, myid=None):
 def recheck_existing_files(filing_dir=filing_dir, myid=None):
     #find unreadable files and delete them
     try:
-        existing_files = os.listdir(filing_dir)
+        existing_files = sorted(os.listdir(filing_dir))
         retry_filings = set()
         filecounter = 0
         for file in existing_files:

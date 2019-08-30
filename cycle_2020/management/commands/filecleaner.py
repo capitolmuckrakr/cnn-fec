@@ -8,7 +8,7 @@ import time
 import traceback
 import sys
 
-from cycle_2020.utils import unreadable_files_2020
+from cycle_2020.utils import unreadable_files
 
 from cycle_2020.utils import loader
 

@@ -23,7 +23,7 @@ logger.setLevel(LOGLEVEL)
 
 myid=uuid.uuid4()
 
-x = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER,'TAGS':'cnn-fec, result:success'}
+myextra = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER}
 
 class Command(BaseCommand):
 
@@ -40,10 +40,12 @@ class Command(BaseCommand):
         else:
             filing_dir = os.environ.get('HOME') + '/scripts/cnn-fec/filings/'
 
-        filings = unreadable_files.recheck_existing_files(filing_dir,myextra=x)
+        filings = unreadable_files.recheck_existing_files(filing_dir,myextra=myextra)
         
         if  len(filings) >0:
-            logger.warning("Found and deleted {} unreadable files".format(len(filings)),extra=x)
+            myextra=myextra.copy()
+            myextra['TAGS']='cnn-fec, result:success'
+            logger.info("Found and deleted {} unreadable files".format(len(filings)),extra=myextra)
 
         
         #loader.download_filings(filings, filing_dir)

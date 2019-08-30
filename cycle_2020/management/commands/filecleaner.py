@@ -21,7 +21,7 @@ SYSLOG_IDENTIFIER = os.environ.get('SYSLOG_IDENTIFIER','')
 logger = logging.getLogger("cnn-fec."+__name__)
 logger.setLevel(LOGLEVEL)
 
-myid=uuid.uuid5(uuid.NAMESPACE_DNS, logger.name)
+myid=uuid.uuid4()
 
 class Command(BaseCommand):
 

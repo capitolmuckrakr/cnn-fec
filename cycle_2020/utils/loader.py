@@ -9,6 +9,7 @@ import sys
 import urllib3
 import lxml
 import itertools
+import logging as canon_logging
 from decimal import Decimal
 from cycle_2020.utils import logging
 
@@ -19,12 +20,18 @@ import process_filing #this is from fec2json
 from cycle_2020.models import *
 from django.conf import settings
 
-
+LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
+logger = canon_logging.getLogger('cnn-fec.'+__name__)
+logger.setLevel(LOGLEVEL)
 
 ACCEPTABLE_FORMS = ['F3','F3X','F3P','F24', 'F5']
 BAD_COMMITTEES = ['C00401224','C00630012'] #actblue; it starts today
 API_KEY = os.environ.get('FEC_API_KEY')
-assert API_KEY, "Cannot find a FEC api key, please add as environment variable FEC_API_KEY"
+try:
+    assert API_KEY
+except AssertionError as err:
+    logger.warning("Cannot find a FEC api key, please add as environment variable FEC_API_KEY")
+    raise err
 
 from cycle_2020.cycle_settings import CYCLE
 def get_filing_list(start_date, end_date, max_fails=10, waittime=10):

@@ -9,7 +9,7 @@ logger.setLevel(LOGLEVEL)
 
 filing_dir = os.environ.get('HOME') + '/scripts/cnn-fec/filings/'
 
-def readable_file_check(file, filing_dir=filing_dir, myid=None):
+def readable_file_check(file, filing_dir=filing_dir, myextra=None):
     """pop open a downloaded file and flag it if it's not a readable csv.
 
         Args:
@@ -22,27 +22,31 @@ def readable_file_check(file, filing_dir=filing_dir, myid=None):
                 False otherwise. Logs details of False results if LOGLEVEL has been set to 'info'.
     """
     filename = '{}{}'.format(filing_dir, file)
+    if myextra:
+        x=myextra.copy()
+        x['FILING']=file.split('.')[0]
+    else:
+        x=''
     #with open(filename, errors="backslashreplace") as f:
     with open(filename) as f:
         try:
             if f.readlines(1)[0] == '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"\n':
-                logger.info("File {} isn't a csv, FEC site returned an empty web page instead".format(file))
+                logger.info("File {} isn't a csv, FEC site returned an empty web page instead".format(file),extra=x)
                 return False
             else:
                 return True
         except UnicodeDecodeError:
-            logger.info("File {} can't be decoded".format(file))
+            logger.info("File {} can't be decoded".format(file),extra=x)
             return False
         except IndexError:
             if file == '.placeholder':
-                logger.debug("Skipping {}, not a filing".format(file))
+                logger.debug("Skipping {}, not a filing".format(file),extra=x)
                 return True
             else:
-                logger.info("File {} can't be indexed".format(file))
+                logger.info("File {} can't be indexed".format(file),extra=x)
                 return False
-    filename = None
 
-def delete_file(file, filing_dir=filing_dir, myid=None):
+def delete_file(file, filing_dir=filing_dir, myextra=None):
     filename = '{}{}.csv'.format(filing_dir, file)
     if os.path.isfile(filename):
         try:
@@ -53,7 +57,7 @@ def delete_file(file, filing_dir=filing_dir, myid=None):
             raise err
     return True
 
-def reset_refused_filing_to_failed(filing_id, myid=None):
+def reset_refused_filing_to_failed(filing_id, myextra=None):
     try:
         fs = FilingStatus.objects.filter(filing_id=filing_id)
         if len(fs) > 0:
@@ -67,7 +71,7 @@ def reset_refused_filing_to_failed(filing_id, myid=None):
         logger.error("Filing {} status can't be reset".format(file))
         raise err
 
-def recheck_existing_files(filing_dir=filing_dir, myid=None):
+def recheck_existing_files(filing_dir=filing_dir, myextra=None):
     #find unreadable files and delete them
     try:
         existing_files = sorted(os.listdir(filing_dir))
@@ -75,13 +79,13 @@ def recheck_existing_files(filing_dir=filing_dir, myid=None):
         filecounter = 0
         for file in existing_files:
             filecounter += 1
-            if filecounter % 10000 == 0:
-                logger.debug('{} of {} files, found {} unreadable files'.format(filecounter,len(existing_files),len(retry_filings)))
-            if not readable_file_check(file, filing_dir=filing_dir, myid=myid):
+            if filecounter % 10000 == 0 or filecounter == len(existing_files):
+                logger.debug('{} of {} files, found {} unreadable files'.format(filecounter,len(existing_files),len(retry_filings)),extra=myextra)
+            if not readable_file_check(file, filing_dir=filing_dir, myextra=myextra):
                 #if reset_refused_filing_to_failed(filing_id):
                 #    if delete_file(file, filing_dir=filing_dir):
                         retry_filings.add(file.split('.')[0])
         return retry_filings
     except Exception as err:
-        logger.critical("File recheck failed!")
+        logger.critical("File recheck failed!",extra=myextra)
         raise err

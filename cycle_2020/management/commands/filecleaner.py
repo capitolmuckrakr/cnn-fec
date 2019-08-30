@@ -23,6 +23,8 @@ logger.setLevel(LOGLEVEL)
 
 myid=uuid.uuid4()
 
+x = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER,'TAGS':'cnn-fec, result:success'}
+
 class Command(BaseCommand):
 
     def add_arguments(self, parser):
@@ -38,8 +40,8 @@ class Command(BaseCommand):
         else:
             filing_dir = os.environ.get('HOME') + '/scripts/cnn-fec/filings/'
 
-        filings = unreadable_files_2020.recheck_existing_files(filing_dir)
-        x = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER,'TAGS':'cnn-fec, result:success'}
+        filings = unreadable_files.recheck_existing_files(filing_dir,myextra=x)
+        
         if  len(filings) >0:
             logger.warning("Found and deleted {} unreadable files".format(len(filings)),extra=x)
 

@@ -34,7 +34,7 @@ except AssertionError as err:
     raise err
 
 from cycle_2020.cycle_settings import CYCLE
-def get_filing_list(start_date, end_date, max_fails=10, waittime=10):
+def get_filing_list(start_date, end_date, max_fails=10, waittime=10, myextra=None):
     #gets list of available filings from the FEC.
     #TODO: institute an API key pool or fallback?
     url = "https://api.open.fec.gov/v1/efile/filings/?per_page=100&sort=-receipt_date"
@@ -45,10 +45,15 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10):
     filings = []
     page = 1
     fails = 0
+
     while True:
         #get new filing ids from FEC API
         resp = requests.get(url+"&page={}".format(page))
         page += 1
+        if myextra:
+            myextra=myextra.copy()
+        else:
+            myextra=''
         try:
             files = resp.json()
         except:
@@ -58,6 +63,9 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10):
                 logging.log(title="FEC download failed",
                     text='Failed to download valid JSON from FEC site {} times'.format(max_fails),
                     tags=["cnn-fec", "result:fail"])
+                myextra['TAGS']='cnn-fec, result:fail'
+                logger.warning('Failed to download valid JSON from FEC site {} times'.format(max_fails),
+                               extra=myextra)
                 return None
             time.sleep(waittime)
         try:
@@ -68,6 +76,9 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10):
                 logging.log(title="FEC download failed",
                     text='Failed to download valid JSON from FEC site {} times'.format(max_fails),
                     tags=["cnn-fec", "result:fail"])
+                myextra['TAGS']='cnn-fec, result:fail'
+                logger.warning('Failed to download valid JSON from FEC site {} times'.format(max_fails),
+                               extra=myextra)
                 return None
             time.sleep(waittime)
             continue
@@ -191,23 +202,28 @@ def check_coverage_dates(filing, coverage_end):
     return True
 
 
-def download_filings(filings, filing_dir="filings/"):
+def download_filings(filings, filing_dir="filings/", myextra=None):
     #takes a list of filing ids, downloads the files
     http = urllib3.PoolManager()
     existing_filings = os.listdir(filing_dir)
     for filing in filings:
         #download filings
         filename = '{}{}.csv'.format(filing_dir, filing)
+        if myextra:
+            myextra=myextra.copy()
+        else:
+            myextra=''
         if filename not in existing_filings:
             file_url = 'http://docquery.fec.gov/csv/{}/{}.csv'.format(str(filing)[-3:],filing)
             if os.path.isfile(filename):
-                pass
+                logger.debug('we already downloaded {}'.format(filing),extra=myextra)
             #    sys.stdout.write("we already have filing {} downloaded\n".format(filing))
             else:
+                myextra['FILING']=str(filing)
                 response = http.request('GET', file_url)
                 with open(filename,'wb') as f:
                     f.write(response.data)
-                sys.stdout.write('downloaded {}\n'.format(filing))
+                logger.info('downloaded {}'.format(filing),extra=myextra)
                 #os.system('curl -o {} {}'.format(filename, file_url))
 
 def load_itemizations(sked_model, skeds, debug=False):

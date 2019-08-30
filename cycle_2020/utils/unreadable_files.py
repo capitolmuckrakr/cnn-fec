@@ -9,7 +9,7 @@ logger.setLevel(LOGLEVEL)
 
 filing_dir = os.environ.get('HOME') + '/scripts/cnn-fec/filings/'
 
-def readable_file_check(file, filing_dir=filing_dir):
+def readable_file_check(file, filing_dir=filing_dir, myid=None):
     """pop open a downloaded file and flag it if it's not a readable csv.
 
         Args:
@@ -42,7 +42,7 @@ def readable_file_check(file, filing_dir=filing_dir):
                 return False
     filename = None
 
-def delete_file(file, filing_dir=filing_dir):
+def delete_file(file, filing_dir=filing_dir, myid=None):
     filename = '{}{}.csv'.format(filing_dir, file)
     if os.path.isfile(filename):
         try:
@@ -53,7 +53,7 @@ def delete_file(file, filing_dir=filing_dir):
             raise err
     return True
 
-def reset_refused_filing_to_failed(filing_id):
+def reset_refused_filing_to_failed(filing_id, myid=None):
     try:
         fs = FilingStatus.objects.filter(filing_id=filing_id)
         if len(fs) > 0:
@@ -67,7 +67,7 @@ def reset_refused_filing_to_failed(filing_id):
         logger.error("Filing {} status can't be reset".format(file))
         raise err
 
-def recheck_existing_files(filing_dir=filing_dir):
+def recheck_existing_files(filing_dir=filing_dir, myid=None):
     #find unreadable files and delete them
     try:
         existing_files = os.listdir(filing_dir)
@@ -77,7 +77,7 @@ def recheck_existing_files(filing_dir=filing_dir):
             filecounter += 1
             if filecounter % 10000 == 0:
                 logger.debug('{} of {} files, found {} unreadable files'.format(filecounter,len(existing_files),len(retry_filings)))
-            if not readable_file_check(file, filing_dir=filing_dir):
+            if not readable_file_check(file, filing_dir=filing_dir, myid=myid):
                 #if reset_refused_filing_to_failed(filing_id):
                 #    if delete_file(file, filing_dir=filing_dir):
                         retry_filings.add(file.split('.')[0])

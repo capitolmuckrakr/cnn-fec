@@ -74,7 +74,14 @@ def reset_refused_filing_to_failed(filing_id, myextra=None):
             if fs.status == 'REFUSED':
                 fs.status = 'FAILED'
                 fs.save()
-                logger.info('Filing {} status updated to FAILED'.format(filing_id),extra=myextra)
+                logger.info('Filing {} status updated to "FAILED" from "REFUSED"'.format(filing_id),extra=myextra)
+            elif fs.status == 'SUCCESS':
+                logger.warn('Filing {} status was set to "SUCCESS", not resetting'.format(filing_id),extra=myextra)
+                return False
+            else:
+                #Do not do anything if status is "FAILED".
+                #Also in case other values are allowed in the future for FilingStatus.status 
+                return False
         return True
     except Exception as err:
         logger.error("Filing {} status can't be reset".format(file),extra=myextra)

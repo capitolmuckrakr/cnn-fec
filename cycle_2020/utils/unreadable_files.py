@@ -24,8 +24,6 @@ def readable_file_check(file, filing_dir=filing_dir, myextra=None):
     if myextra:
         myextra=myextra.copy()
         myextra['FILING']=file.split('.')[0]
-    else:
-        myextra=''
     #with open(filename, errors="backslashreplace") as f:
     with open(filename) as f:
         try:
@@ -50,8 +48,6 @@ def delete_file(file, filing_dir=filing_dir, myextra=None):
     if myextra:
         myextra=myextra.copy()
         myextra['FILING']=file.split('.')[0]
-    else:
-        myextra=''
     if os.path.isfile(filename):
         try:
             os.unlink(filename)
@@ -65,8 +61,6 @@ def reset_refused_filing_to_failed(filing_id, myextra=None):
     if myextra:
         myextra=myextra.copy()
         myextra['FILING']=filing_id
-    else:
-        myextra=''
     try:
         fs = FilingStatus.objects.filter(filing_id=filing_id)
         if len(fs) > 0:

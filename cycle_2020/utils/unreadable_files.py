@@ -100,7 +100,7 @@ def recheck_existing_files(filing_dir=filing_dir, myextra=None):
                 if file[0] == ".":
                     continue
                 if reset_refused_filing_to_failed(filing_id, myextra=myextra):
-                #    if delete_file(file, filing_dir=filing_dir):
+                #    if delete_file(file, filing_dir=filing_dir, myextra=myextra):
                         retry_filings.add(file.split('.')[0])
             if filecounter % 10000 == 0:
                 logger.debug('{} of {} files, found {} unreadable files'.format(filecounter,len(existing_files),len(retry_filings)),extra=myextra)

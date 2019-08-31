@@ -63,7 +63,8 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10, myextra=Non
                 logging.log(title="FEC download failed",
                     text='Failed to download valid JSON from FEC site {} times'.format(max_fails),
                     tags=["cnn-fec", "result:fail"])
-                myextra['TAGS']='cnn-fec, result:fail'
+                if not myextra=='':
+                    myextra['TAGS']='cnn-fec, result:fail'
                 logger.warning('Failed to download valid JSON from FEC site {} times'.format(max_fails),
                                extra=myextra)
                 return None
@@ -76,7 +77,8 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10, myextra=Non
                 logging.log(title="FEC download failed",
                     text='Failed to download valid JSON from FEC site {} times'.format(max_fails),
                     tags=["cnn-fec", "result:fail"])
-                myextra['TAGS']='cnn-fec, result:fail'
+                if not myextra=='':
+                    myextra['TAGS']='cnn-fec, result:fail'
                 logger.warning('Failed to download valid JSON from FEC site {} times'.format(max_fails),
                                extra=myextra)
                 return None
@@ -211,6 +213,7 @@ def download_filings(filings, filing_dir="filings/", myextra=None):
         filename = '{}{}.csv'.format(filing_dir, filing)
         if myextra:
             myextra=myextra.copy()
+            myextra['FILING']=str(filing)
         else:
             myextra=''
         if filename not in existing_filings:
@@ -219,7 +222,6 @@ def download_filings(filings, filing_dir="filings/", myextra=None):
                 logger.debug('we already downloaded {}'.format(filing),extra=myextra)
             #    sys.stdout.write("we already have filing {} downloaded\n".format(filing))
             else:
-                myextra['FILING']=str(filing)
                 response = http.request('GET', file_url)
                 with open(filename,'wb') as f:
                     f.write(response.data)

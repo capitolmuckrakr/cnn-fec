@@ -88,12 +88,14 @@ def recheck_existing_files(filing_dir=filing_dir, myextra=None):
         filecounter = 0
         for file in existing_files:
             filecounter += 1
-            if filecounter % 10000 == 0 or filecounter == len(existing_files):
-                logger.debug('{} of {} files, found {} unreadable files'.format(filecounter,len(existing_files),len(retry_filings)),extra=myextra)
             if not readable_file_check(file, filing_dir=filing_dir, myextra=myextra):
                 #if reset_refused_filing_to_failed(filing_id):
                 #    if delete_file(file, filing_dir=filing_dir):
                         retry_filings.add(file.split('.')[0])
+            if filecounter % 10000 == 0:
+                logger.debug('{} of {} files, found {} unreadable files'.format(filecounter,len(existing_files),len(retry_filings)),extra=myextra)
+            if filecounter == len(existing_files):
+                logger.info('{} of {} files, found {} unreadable files'.format(filecounter,len(existing_files),len(retry_filings)),extra=myextra)
         return retry_filings
     except Exception as err:
         logger.critical("File recheck failed!",extra=myextra)

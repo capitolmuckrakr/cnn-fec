@@ -96,7 +96,8 @@ def recheck_existing_files(filing_dir=filing_dir, myextra=None):
         for file in existing_files:
             filecounter += 1
             if not readable_file_check(file, filing_dir=filing_dir, myextra=myextra):
-                #if reset_refused_filing_to_failed(filing_id):
+                filing_id = file.split('.')[0]
+                if reset_refused_filing_to_failed(filing_id, myextra=myextra):
                 #    if delete_file(file, filing_dir=filing_dir):
                         retry_filings.add(file.split('.')[0])
             if filecounter % 10000 == 0:

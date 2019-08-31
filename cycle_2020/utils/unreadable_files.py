@@ -81,7 +81,7 @@ def reset_refused_filing_to_failed(filing_id, myextra=None):
         raise err
 
 def recheck_existing_files(filing_dir=filing_dir, myextra=None):
-    #find unreadable files and delete them
+    #find unreadable files, reset their status if we've refused them and delete them
     try:
         existing_files = sorted(os.listdir(filing_dir))
         retry_filings = set()

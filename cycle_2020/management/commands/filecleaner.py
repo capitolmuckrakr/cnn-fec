@@ -48,7 +48,7 @@ class Command(BaseCommand):
             logger.info("Found and deleted {} unreadable files".format(len(filings)),extra=myextra)
 
         
-        #loader.download_filings(filings, filing_dir)
+        #loader.download_filings(filings, filing_dir,extra=myextra)
         #loader.load_filings(filing_dir)
 
 

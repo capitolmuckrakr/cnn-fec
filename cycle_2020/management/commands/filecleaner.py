@@ -23,8 +23,6 @@ logger.setLevel(LOGLEVEL)
 
 myid=uuid.uuid4()
 
-myextra = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER}
-
 class Command(BaseCommand):
 
     def add_arguments(self, parser):
@@ -39,6 +37,8 @@ class Command(BaseCommand):
             filing_dir = options['filing_dir']
         else:
             filing_dir = os.environ.get('HOME') + '/scripts/cnn-fec/filings/'
+
+        myextra = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER}
 
         filings = unreadable_files.recheck_existing_files(filing_dir,myextra=myextra)
         

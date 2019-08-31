@@ -97,6 +97,8 @@ def recheck_existing_files(filing_dir=filing_dir, myextra=None):
             filecounter += 1
             if not readable_file_check(file, filing_dir=filing_dir, myextra=myextra):
                 filing_id = file.split('.')[0]
+                if file[0] == ".":
+                    continue
                 if reset_refused_filing_to_failed(filing_id, myextra=myextra):
                 #    if delete_file(file, filing_dir=filing_dir):
                         retry_filings.add(file.split('.')[0])

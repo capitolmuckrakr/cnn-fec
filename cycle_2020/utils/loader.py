@@ -204,25 +204,31 @@ def check_coverage_dates(filing, coverage_end):
 
 def download_filings(filings, filing_dir="filings/", myextra=None):
     #takes a list of filing ids, downloads the files
-    http = urllib3.PoolManager()
-    existing_filings = os.listdir(filing_dir)
-    for filing in filings:
-        #download filings
-        filename = '{}{}.csv'.format(filing_dir, filing)
-        if myextra:
-            myextra=myextra.copy()
-            myextra['FILING']=str(filing)
-        if filename not in existing_filings:
-            file_url = 'http://docquery.fec.gov/csv/{}/{}.csv'.format(str(filing)[-3:],filing)
-            if os.path.isfile(filename):
-                logger.debug('we already downloaded {}'.format(filing),extra=myextra)
-            #    sys.stdout.write("we already have filing {} downloaded\n".format(filing))
-            else:
-                response = http.request('GET', file_url)
-                with open(filename,'wb') as f:
-                    f.write(response.data)
-                logger.info('downloaded {}'.format(filing),extra=myextra)
-                #os.system('curl -o {} {}'.format(filename, file_url))
+    try:
+        if filings:
+            http = urllib3.PoolManager()
+            existing_filings = os.listdir(filing_dir)
+            for filing in filings:
+                #download filings
+                filename = '{}{}.csv'.format(filing_dir, filing)
+                if myextra:
+                    myextra=myextra.copy()
+                    myextra['FILING']=str(filing)
+                if filename not in existing_filings:
+                    file_url = 'http://docquery.fec.gov/csv/{}/{}.csv'.format(str(filing)[-3:],filing)
+                    if os.path.isfile(filename):
+                        logger.debug('we already downloaded {}'.format(filing),extra=myextra)
+                    #    sys.stdout.write("we already have filing {} downloaded\n".format(filing))
+                    else:
+                        response = http.request('GET', file_url)
+                        with open(filename,'wb') as f:
+                            f.write(response.data)
+                        logger.info('downloaded {}'.format(filing),extra=myextra)
+                        #os.system('curl -o {} {}'.format(filename, file_url))
+        else:
+            logger.warning('Missing required list of filings to download or list is empty',extra=myextra)
+    except Exception as e:
+        logger.error("Failed to download from FEC site",extra=myextra)
 
 def load_itemizations(sked_model, skeds, debug=False):
     #if debug is true, we'll load one at a time, otherwise bulk_create

@@ -3,6 +3,7 @@ import os
 from config.dev.settings import *
 
 DEBUG = False
+
 WSGI_APPLICATION = 'config.prd.app.application'
 
 DATABASES = {
@@ -12,30 +13,29 @@ DATABASES = {
         'USER': os.environ.get('DB_USER', 'fec_prd'),
         'PASSWORD': os.environ.get('DB_PASSWORD', None),
         'HOST': os.environ.get('DB_HOST', None),
+        'PORT': os.environ.get('DB_PORT', 5432),
     }
 }
 
 ALLOWED_HOSTS = ['*']
 
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', None)
-AWS_S3_CUSTOM_DOMAIN = os.environ.get('S3_BUCKET_DOMAIN', 'int.nyt.com')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME', 'int.nyt.com')
-AWS_S3_SECURE_URLS = True
-AWS_S3_URL_PROTOCOL = 'https:'
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', None)
+AWS_STATIC_LOCATION = os.environ.get('AWS_STATIC_LOCATION', None)
+AWS_LOCATION = AWS_STATIC_LOCATION
+AWS_MEDIA_LOCATION = os.environ.get('AWS_MEDIA_LOCATION', None)
+AWS_DEFAULT_ACL = 'public-read'
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=600',
+}
 
-DATADOG_API_KEY = os.environ.get('DATADOG_API_KEY')
-DATADOG_APP_KEY = os.environ.get('DATADOG_APP_KEY')
+STATICFILES_LOCATION = AWS_STATIC_LOCATION
+MEDIAFILES_LOCATION = AWS_MEDIA_LOCATION
 
+STATICFILES_STORAGE = 'utils.custom_storages.StaticStorage'
+DEFAULT_FILE_STORAGE = 'utils.custom_storages.MediaStorage'
 
-if not (DATADOG_API_KEY and DATADOG_APP_KEY):
-    print("{}: datadog credentials missing")
-try:
-    options = {
-        'api_key':DATADOG_API_KEY,
-        'app_key':DATADOG_APP_KEY
-    }
-    initialize(**options)
-except Exception as e:
-    print("{}: failed to intialize datadog")
-
+STATIC_URL = f"https://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{AWS_STATIC_LOCATION}/"
+MEDIA_URL = f"https://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}/{AWS_MEDIA_LOCATION}/"

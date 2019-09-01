@@ -52,8 +52,6 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10, myextra=Non
         page += 1
         if myextra:
             myextra=myextra.copy()
-        else:
-            myextra=''
         try:
             files = resp.json()
         except:
@@ -63,7 +61,7 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10, myextra=Non
                 logging.log(title="FEC download failed",
                     text='Failed to download valid JSON from FEC site {} times'.format(max_fails),
                     tags=["cnn-fec", "result:fail"])
-                if not myextra=='':
+                if myextra:
                     myextra['TAGS']='cnn-fec, result:fail'
                 logger.warning('Failed to download valid JSON from FEC site {} times'.format(max_fails),
                                extra=myextra)
@@ -77,7 +75,7 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10, myextra=Non
                 logging.log(title="FEC download failed",
                     text='Failed to download valid JSON from FEC site {} times'.format(max_fails),
                     tags=["cnn-fec", "result:fail"])
-                if not myextra=='':
+                if myextra:
                     myextra['TAGS']='cnn-fec, result:fail'
                 logger.warning('Failed to download valid JSON from FEC site {} times'.format(max_fails),
                                extra=myextra)
@@ -214,8 +212,6 @@ def download_filings(filings, filing_dir="filings/", myextra=None):
         if myextra:
             myextra=myextra.copy()
             myextra['FILING']=str(filing)
-        else:
-            myextra=''
         if filename not in existing_filings:
             file_url = 'http://docquery.fec.gov/csv/{}/{}.csv'.format(str(filing)[-3:],filing)
             if os.path.isfile(filename):

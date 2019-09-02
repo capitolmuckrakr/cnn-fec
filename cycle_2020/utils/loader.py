@@ -703,7 +703,7 @@ def create_or_update_filing_status(filing_id, status):
         fs.save()    
 
 
-def load_filings(filing_dir):
+def load_filings(filing_dir, myextra=None):
 
     
     filing_fieldnames = [f.name for f in Filing._meta.get_fields()]

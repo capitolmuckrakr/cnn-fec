@@ -743,6 +743,7 @@ def load_filings(filing_dir, myextra=None):
 
             filings_loaded += 1
 
-    logging.log(title="FEC scrape completed".format(filing_id),
-                    text='{} filings successfully loaded'.format(filings_loaded),
-                    tags=["cnn-fec", "result:success"])
+    if myextra:
+        myextra['FILINGS_LOADED']=filings_loaded
+        myextra['TAGS']="cnn-fec", "result:success"
+    logger.info("{} filings successfully loaded".format(filings_loaded),extra=myextra)

@@ -732,7 +732,7 @@ def load_filings(filing_dir, myextra=None):
         if not evaluate_filing_file(full_filename, filing_id):
             continue
                 
-        sys.stdout.write("-------------------\n{}: Started filing {}\n".format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), filing_id))
+        logger.info("Started filing {}".format(filing_id),extra=myextra)
         
 
         if load_filing(filing_id, full_filename, filing_fieldnames):

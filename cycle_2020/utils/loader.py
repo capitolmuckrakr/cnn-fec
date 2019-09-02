@@ -714,6 +714,9 @@ def load_filings(filing_dir, myextra=None):
         filing_id = filename.split(".")[0]
         if filename[0] == ".":
             continue
+        if myextra:
+            myextra=myextra.copy()
+            myextra['FILING']=filing_id
         try:
             int(filing_id)
         except:

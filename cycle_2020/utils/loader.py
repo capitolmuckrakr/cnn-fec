@@ -723,6 +723,8 @@ def load_filings(filing_dir, myextra=None):
             logging.log(title="Bad FEC filename",
                     text='did not recognize filing {}'.format(filename),
                     tags=["cnn-fec", "result:warn"])
+            myextra['TAGS']="cnn-fec", "result:warn"
+            logger.warn('Bad FEC filename {}'.format(filename),extra=myextra)
             continue
 
         full_filename = "{}{}".format(filing_dir, filename)

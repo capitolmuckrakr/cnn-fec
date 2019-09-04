@@ -410,7 +410,7 @@ def last_odd_filing(filing):
             return old_filing
 
 
-def evaluate_filing_file(filename, filing_id):
+def evaluate_filing_file(filename, filing_id, myextra=None):
     with open(filename, "r") as filing_csv:
         #pop each filing open, check the filing type, and add to queue if we want this one
         reader = csv.reader(filing_csv)

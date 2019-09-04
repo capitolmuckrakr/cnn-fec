@@ -411,6 +411,9 @@ def last_odd_filing(filing):
 
 
 def evaluate_filing_file(filename, filing_id, myextra=None):
+    if myextra:
+        myextra=myextra.copy()
+        myextra['FILING']=str(filing_id)
     with open(filename, "r") as filing_csv:
         #pop each filing open, check the filing type, and add to queue if we want this one
         reader = csv.reader(filing_csv)

@@ -12,6 +12,7 @@ import itertools
 import logging as canon_logging
 from decimal import Decimal
 from cycle_2020.utils import logging
+from cycle_2020.utils import unreadable_files
 
 from bs4 import BeautifulSoup
 

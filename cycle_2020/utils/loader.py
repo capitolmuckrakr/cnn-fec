@@ -414,15 +414,22 @@ def evaluate_filing_file(filename, filing_id, myextra=None):
     if myextra:
         myextra=myextra.copy()
         myextra['FILING']=str(filing_id)
+    form_line =''
     with open(filename, "r") as filing_csv:
         #pop each filing open, check the filing type, and add to queue if we want this one
         reader = csv.reader(filing_csv)
         try:
             next(reader)
+        except UnicodeDecodeError:
+            with open(filename, encoding="cp1252") as filing_csv:
+                reader = csv.reader(filing_csv)
+                next(reader)
+                form_line = next(reader)
         except:
             #print('Filing has no lines!!')
             return False
-        form_line = next(reader)
+        else:
+            form_line = next(reader)
         if form_line[0].replace('A','').replace('N','') not in ACCEPTABLE_FORMS:
             create_or_update_filing_status(filing_id, 'REFUSED')
             #print('Not loading forms of type {}, refused this filing'.format(form_line[0]))

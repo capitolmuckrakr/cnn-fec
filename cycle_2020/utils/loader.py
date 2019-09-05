@@ -497,6 +497,9 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
     
     #this means the filing already exists
     #TODO add checking to see if import was successful
+    if myextra:
+        myextra=myextra.copy()
+        myextra['FILING']=str(filing_id)
     filing_matches = Filing.objects.filter(filing_id=filing)
     if len(filing_matches) == 1:
         if filing_matches[0].status != "FAILED":

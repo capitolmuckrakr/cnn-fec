@@ -503,10 +503,10 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
     filing_matches = Filing.objects.filter(filing_id=filing)
     if len(filing_matches) == 1:
         if filing_matches[0].status != "FAILED":
-            sys.stdout.write('filing {} already exists\n'.format(filing))
+            logger.info('filing {} already exists\n'.format(filing), extra=myextra)
             return False
         else:
-            sys.stdout.write("Reloading {}, it failed previously\n".format(filing))
+            logger.info("Reloading {}, it failed previously\n".format(filing), extra=myextra)
     
     #filing does not exist or it failed previously
     try:

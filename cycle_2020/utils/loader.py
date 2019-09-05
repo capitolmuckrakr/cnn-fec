@@ -491,7 +491,7 @@ def get_filer_name(filer_id):
         return None
     return data['results'][0]['name']
 
-def load_filing(filing, filename, filing_fieldnames):
+def load_filing(filing, filename, filing_fieldnames, myextra=None):
     #returns boolean depending on whether filing was loaded
     
     

@@ -418,7 +418,7 @@ def evaluate_filing_file(filename, filing_id, myextra=None):
     with open(filename, "r") as filing_csv:
         #pop each filing open, check the filing type, and add to queue if we want this one
         reader = csv.reader(filing_csv)
-        unreadable_files.readable_file_check('{}.csv'.format(filing_id),filing_dir,myextra=myextra)
+        unreadable_files.readable_file_check('{}.csv'.format(filing_id),myextra=myextra)
         try:
             next(reader)
         except UnicodeDecodeError:

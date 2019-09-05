@@ -499,7 +499,7 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
     #TODO add checking to see if import was successful
     if myextra:
         myextra=myextra.copy()
-        myextra['FILING']=str(filing_id)
+        myextra['FILING']=str(filing)
     filing_matches = Filing.objects.filter(filing_id=filing)
     if len(filing_matches) == 1:
         if filing_matches[0].status != "FAILED":

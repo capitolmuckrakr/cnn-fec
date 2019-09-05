@@ -569,6 +569,10 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
                     ScheduleA.objects.filter(filing_id=amended_filing.filing_id).update(active=False, status='SUPERSEDED')
                     ScheduleB.objects.filter(filing_id=amended_filing.filing_id).update(active=False, status='SUPERSEDED')
                     ScheduleE.objects.filter(filing_id=amended_filing.filing_id).update(active=False, status='SUPERSEDED')
+                    if myextra:
+                        myextra=myextra.copy()
+                        myextra['FILING']=str(amended_filing.filing_id)
+                    logger.info("Filing {} was deactivated and status was set to SUPERSEDED because {} amends it".format(amended_filing.filing_id,filing), extra=myextra)
 
     if filing_dict['form'] in ['F3','F3X','F3P','F5']:
         #could be a periodic, so see if there are covered forms that need to be deactivated

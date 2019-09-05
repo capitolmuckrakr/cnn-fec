@@ -421,11 +421,11 @@ def evaluate_filing_file(filename, filing_id, myextra=None):
         unreadable_files.readable_file_check('{}.csv'.format(filing_id),myextra=myextra)
         try:
             next(reader)
-        except UnicodeDecodeError:
-            with open(filename, encoding="cp1252") as filing_csv:
-                reader = csv.reader(filing_csv)
-                next(reader)
-                form_line = next(reader)
+#        except UnicodeDecodeError:
+#            with open(filename, encoding="cp1252") as filing_csv:
+#                reader = csv.reader(filing_csv)
+#                next(reader)
+#                form_line = next(reader)
         except:
             #print('Filing has no lines!!')
             return False

@@ -388,7 +388,7 @@ def clean_filing_fields(processed_filing, filing_fieldnames,myextra=None):
             pass
     return clean_filing
 
-def is_even_year(filing):
+def is_even_year(filing,myextra=None):
     try:
         year = int(filing['coverage_through_date'][0:4])
     except:

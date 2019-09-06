@@ -778,10 +778,8 @@ def load_filings(filing_dir, myextra=None):
         try:
             int(filing_id)
         except:
-            logging.log(title="Bad FEC filename",
-                    text='did not recognize filing {}'.format(filename),
-                    tags=["cnn-fec", "result:warn"])
-            myextra['TAGS']="cnn-fec, result:warn"
+            if myextra:
+                myextra['TAGS']="cnn-fec, result:warn"
             logger.warn('Bad FEC filename {}'.format(filename),extra=myextra)
             continue
 

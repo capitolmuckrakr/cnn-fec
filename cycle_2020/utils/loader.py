@@ -723,9 +723,10 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
         ScheduleA.objects.filter(filing_id=filing).delete()
         ScheduleB.objects.filter(filing_id=filing).delete()
         ScheduleE.objects.filter(filing_id=filing).delete()
-        logging.log(title="Itemization load failed",
-                    text='Something failed in itemizations, marking {} as FAILED'.format(filing),
-                    tags=["cnn-fec", "result:fail"])
+        if myextra:
+            myextra['TAGS']='cnn-fec, result:fail'
+        logger.error("Itemization load failed, marking {} as FAILED".format(filing),
+                    extra=myextra)
         return False
 
     if is_amended and amends_filing:

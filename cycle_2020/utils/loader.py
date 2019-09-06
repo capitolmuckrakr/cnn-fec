@@ -493,6 +493,7 @@ def get_filer_name(filer_id, myextra=None):
             committee_type=data['results'][0]['committee_type'],
             committee_designation=data['results'][0]['designation'],)
         comm.save()
+        logger.info('Creating and saving new committee {}'.format(data['results'][0]['committee_id']),extra=myextra)
     except:
         return None
     return data['results'][0]['name']

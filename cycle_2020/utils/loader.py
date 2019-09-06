@@ -557,7 +557,7 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
                 #it is probably an amendment of an out-of-cycle filing
                 #so do not load it
                 if filing_dict['form'] in ['F24', 'F5']:
-                    sys.stdout.write('Filing {} is an amended {} with no base. Probably from an old cycle. Not loading\n'.format(filing, filing_dict['form']))
+                    logger.info('Filing {} is an amended {} with no base. Probably from an old cycle. Not loading'.format(filing, filing_dict['form']),extra=myextra)
                     create_or_update_filing_status(filing, 'REFUSED')
                     return False
                 sys.stdout.write("could not find filing {}, which was amended by {}, so not deactivating any transactions\n".format(amends_filing, filing))

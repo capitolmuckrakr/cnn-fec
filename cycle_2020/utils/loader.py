@@ -392,7 +392,7 @@ def is_even_year(filing,myextra=None):
     try:
         year = int(filing['coverage_through_date'][0:4])
     except:
-        logger.info('Could not find coverage date for filing {}, not fixing sums'.format(filing['filing_id']), extra=myextra)
+        logger.warning('Could not find coverage date for filing {}, not fixing sums'.format(filing['filing_id']), extra=myextra)
         return
     if year % 2 == 0:
         return True

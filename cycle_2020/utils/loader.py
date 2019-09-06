@@ -468,6 +468,9 @@ def get_filer_name(filer_id, myextra=None):
     committee = Committee.objects.filter(fec_id=filer_id)
     if len(committee) == 1 and committee[0].committee_name:
         return committee[0].committee_name
+    if myextra:
+        myextra=myextra.copy()
+        myextra['COMMITTEE']=filer_id
     base_url = "https://api.open.fec.gov/v1/committee/{}/?api_key={}"
     url = base_url.format(filer_id, API_KEY)
     r = requests.get(url)

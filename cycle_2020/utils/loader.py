@@ -543,9 +543,9 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
             amends_filing = int(amends_filing_str)
         except ValueError:
             #should be a warning or possibly critical
-            logging.log(title="Filing {} Failed".format(filing),
-                    text='Invalid amendment number {} for filing {}, creating filing and marking as FAILED\n'.format(filing_dict['amends_filing'],filing),
-                    tags=["cnn-fec", "result:fail"])
+            if myextra:
+                myextra['TAGS']="cnn-fec, result:fail"
+            logger.error("Invalid amendment number {} for filing {}, creating filing and marking as FAILED".format(filing_dict['amends_filing'],filing),extra=myextra)
             filing_obj = Filing.objects.create(filing_id=filing, status='FAILED')
             filing_obj.save()
             return False

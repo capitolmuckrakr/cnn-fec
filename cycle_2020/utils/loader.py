@@ -33,7 +33,6 @@ try:
     assert API_KEY
 except AssertionError as err:
     logger.warning("Cannot find a FEC api key, please add as environment variable FEC_API_KEY",extra={'SYSLOG_IDENTIFIER':os.environ.get('SYSLOG_IDENTIFIER','')})
-    raise err
 
 from cycle_2020.cycle_settings import CYCLE
 def get_filing_list(start_date, end_date, max_fails=10, waittime=10, myextra=None):

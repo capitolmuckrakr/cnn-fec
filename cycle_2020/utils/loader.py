@@ -20,6 +20,7 @@ import process_filing #this is from fec2json
 
 from cycle_2020.models import *
 from django.conf import settings
+from django.template.defaultfilters import pluralize
 
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 logger = canon_logging.getLogger('cnn-fec.'+__name__)

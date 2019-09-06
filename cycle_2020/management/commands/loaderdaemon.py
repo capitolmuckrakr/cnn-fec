@@ -47,12 +47,12 @@ class Command(BaseCommand):
         myextra = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER}
 
         logger.info("looking for filings for period {}-{}".format(start_date, end_date), extra=myextra)
-        filings = loader.get_filing_list(start_date, end_date, extra=myextra)
+        filings = loader.get_filing_list(start_date, end_date, myextra=myextra)
         if not filings:
             logger.warning("failed to find any filings for period {}-{}".format(start_date, end_date), extra=myextra)
 
         
-        loader.download_filings(filings, filing_dir, extra=myextra)
-        loader.load_filings(filing_dir,extra=myextra)
+        loader.download_filings(filings, filing_dir, myextra=myextra)
+        loader.load_filings(filing_dir,myextra=myextra)
 
 

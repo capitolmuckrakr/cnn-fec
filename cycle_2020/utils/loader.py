@@ -327,20 +327,20 @@ def reassign_standardized_donors(filing_id, amended_id, myextra=None):
             myextra = myextra.copy()
             myextra['TRANSACTION']=transaction_id
         if len(new_trans) == 0:
-            logging.log(title="donor reassignment issue",
-                    text="filing {} was amended by filing {} and no transaction could be found for donor reassigment for transaction id {}".format(amended_id, filing_id, transaction_id),
-                    tags=["cnn-fec", "result:warning"])
+            if myextra:
+                myextra['TAGS']="cnn-fec, result:warning"
+            logger.warning("filing {} was amended by filing {} and no transaction could be found for donor reassignment for transaction id {}".format(amended_id, filing_id, transaction_id),extra=myextra)
             continue
         if len(new_trans) > 1:
-            logging.log(title="donor reassignment issue",
-                    text="filing {} was amended by filing {} and multiple transaction matches were found for {}".format(amended_id, filing_id, transaction_id),
-                    tags=["cnn-fec", "result:warning"])
+            if myextra:
+                myextra['TAGS']="cnn-fec, result:warning"
+            logger.warning("filing {} was amended by filing {} and multiple transaction matches were found for {}".format(amended_id, filing_id, transaction_id),extra=myextra)
             continue
         new_trans = new_trans[0]
         if new_trans.contributor_last_name != contributor_last_name:
-            logging.log(title="donor reassignment issue",
-                    text="Want to reassign transaction {} from filing {} to filing {} but last names mismatch: {}/{}".format(transaction_id, amended_id, filing_id, contributor_last_name, new_trans.contributor_last_name),    
-                    tags=["cnn-fec", "result:warning"])
+            if myextra:
+                myextra['TAGS']="cnn-fec, result:warning"
+            logger.warning("Want to reassign transaction {} from filing {} to filing {} but last names mismatch: {}/{}".format(transaction_id, amended_id, filing_id, contributor_last_name, new_trans.contributor_last_name),extra=myextra)
             continue
 
         new_trans.donor = transaction.donor

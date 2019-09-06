@@ -629,6 +629,7 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
         logger.info("Reloading {}, it failed previously".format(filing), extra=myextra)
     else:
         filing_obj = Filing.objects.create(**clean_filing_dict)
+        logger.info("Creating and saving new filing {}".format(filing), extra=myextra)
     filing_obj.save()
 
     #create or update committee

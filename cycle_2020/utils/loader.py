@@ -323,6 +323,9 @@ def reassign_standardized_donors(filing_id, amended_id, myextra=None):
         transaction_id = transaction.transaction_id
         contributor_last_name = transaction.contributor_last_name
         new_trans = ScheduleA.objects.filter(transaction_id=transaction_id, filing_id=filing_id)
+        if myextra:
+            myextra = myextra.copy()
+            myextra['TRANSACTION']=transaction_id
         if len(new_trans) == 0:
             logging.log(title="donor reassignment issue",
                     text="filing {} was amended by filing {} and no transaction could be found for donor reassigment for transaction id {}".format(amended_id, filing_id, transaction_id),

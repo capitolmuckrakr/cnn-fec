@@ -599,6 +599,12 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
             by_expend_date = individual_covered_transactions.filter(expenditure_date__gte=coverage_start_date,
                                                                     expenditure_date__lte=coverage_end_date)
             by_expend_date.update(active=False, status='COVERED')
+            for f in by_expend_date:
+                if myextra:
+                    myextra=myextra.copy()
+                    myextra['FILING']=str(f.filing_id)
+                    myextra['TRANSACTION']=f.transaction_id
+                logger.info("SchedE transaction {} from filing {} was deactivated and status was set to COVERED because its expenditure_date is between {} and {} coverage dates of filing {}".format(f.transaction_id,f.filing_id,coverage_start_date,coverage_end_date,filing), extra=myextra)
             by_dissemination_date = individual_covered_transactions.filter(dissemination_date__gte=coverage_start_date,
                                                                     dissemination_date__lte=coverage_end_date)
             by_dissemination_date.update(active=False, status='COVERED')

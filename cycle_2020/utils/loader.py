@@ -661,14 +661,18 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
         committee_fieldnames = [f.name for f in Committee._meta.get_fields()]
         committee = {}
         committee['zipcode'] = filing_dict['zip']
+        fields_count = 1
         for fn in committee_fieldnames:
             try:
                 field = filing_dict[fn]
             except:
                 continue
             committee[fn] = field
+            fields_count += 1
 
         comm = Committee.objects.filter(fec_id=filing_dict['filer_committee_id_number']).update(**committee)
+        message = lambda x: '{} column{} {} updated.'.format(x, pluralize(x), pluralize(x, 'was,were'))
+        logger.info('Updating committee {} from filing {}, {}'.format(fec_id,filing,message(fields_count)),extra=myextra)
     except:
         sys.stdout.write('failed to update committee\n')
 

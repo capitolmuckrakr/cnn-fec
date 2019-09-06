@@ -587,6 +587,11 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
             covered_filings.update(active=False, status='COVERED')
             covered_transactions = ScheduleE.objects.filter(filing_id__in=[f.filing_id for f in covered_filings])
             covered_transactions.update(active=False, status='COVERED')
+            for f in covered_filings:
+                if myextra:
+                    myextra=myextra.copy()
+                    myextra['FILING']=str(f.filing_id)
+                logger.info("Filing {} was deactivated and status was set to COVERED because {} has overlapping coverage dates".format(f.filing_id,filing), extra=myextra)
             #there might be some additional transactions close to the edge of the filing period
             #that we should deactivate based on inconsistent dates inside filings
             individual_covered_transactions = ScheduleE.objects.filter(filer_committee_id_number=filing_dict['filer_committee_id_number'],

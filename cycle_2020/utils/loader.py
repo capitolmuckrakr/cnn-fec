@@ -477,6 +477,8 @@ def get_filer_name(filer_id, myextra=None):
     try:
         data = r.json()
     except:
+        logger.error('Failed to download valid JSON from FEC site while creating committee {}'.format(filer_id),
+                               extra=myextra)
         return None
     #create the committee object
     try:

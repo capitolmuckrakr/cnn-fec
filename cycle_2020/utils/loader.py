@@ -314,7 +314,7 @@ def convert_refund_to_skeda(line):
     
     return skeda_dict
 
-def reassign_standardized_donors(filing_id, amended_id):
+def reassign_standardized_donors(filing_id, amended_id, myextra=None):
     #find all skeda's with donors from the amended filing
     #that we're about to deactivate
     matched_transactions = ScheduleA.objects.filter(filing_id=amended_id).exclude(donor=None)

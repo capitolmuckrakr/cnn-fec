@@ -357,7 +357,7 @@ def clean_filing_fields(processed_filing, filing_fieldnames,myextra=None):
     #check whether the filing requires adding odd-year totals
     odd_filing = None
     addons = {}
-    if processed_filing['form'] == 'F3X' and is_even_year(processed_filing):
+    if processed_filing['form'] == 'F3X' and is_even_year(processed_filing,myextra=myextra):
 
         odd_filing = last_odd_filing(processed_filing)
 

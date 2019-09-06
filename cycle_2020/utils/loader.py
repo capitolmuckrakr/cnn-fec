@@ -652,6 +652,7 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
     try:
         comm = Committee.objects.create(fec_id=filing_dict['filer_committee_id_number'])
         comm.save()
+        logger.info('Creating and saving new committee {} from filing {}'.format(fec_id,filing),extra=myextra)
     except:
         #committee already exists
         pass

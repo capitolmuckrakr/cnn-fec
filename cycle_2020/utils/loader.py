@@ -59,9 +59,6 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10, myextra=Non
             #failed to convert respons to JSON
             fails += 1
             if fails >= max_fails:
-                logging.log(title="FEC download failed",
-                    text='Failed to download valid JSON from FEC site {} times'.format(max_fails),
-                    tags=["cnn-fec", "result:fail"])
                 if myextra:
                     myextra['TAGS']='cnn-fec, result:fail'
                 logger.warning('Failed to download valid JSON from FEC site {} times'.format(max_fails),
@@ -73,9 +70,6 @@ def get_filing_list(start_date, end_date, max_fails=10, waittime=10, myextra=Non
         except KeyError:
             fails += 1
             if fails >= max_fails:
-                logging.log(title="FEC download failed",
-                    text='Failed to download valid JSON from FEC site {} times'.format(max_fails),
-                    tags=["cnn-fec", "result:fail"])
                 if myextra:
                     myextra['TAGS']='cnn-fec, result:fail'
                 logger.warning('Failed to download valid JSON from FEC site {} times'.format(max_fails),

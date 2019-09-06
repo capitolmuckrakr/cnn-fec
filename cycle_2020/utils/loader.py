@@ -348,7 +348,8 @@ def reassign_standardized_donors(filing_id, amended_id, myextra=None):
         transaction.donor = None
         transaction.save()
         i += 1
-    print("reassigned {} transactions from amended filing".format(i))
+        logger.info('Reassigned transaction {} to filing {}'.format(transaction_id,filing_id),extra=myextra)
+    logger.info("reassigned {} transactions from amended filing {}".format(i,amended_id),extra=myextra)
 
 
 

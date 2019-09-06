@@ -461,7 +461,7 @@ def evaluate_filing_file(filename, filing_id, myextra=None):
         #if we get here, a filing exists, it's not 'failed' or 'processing' so we should not load
         return False
 
-def get_filer_name(filer_id):
+def get_filer_name(filer_id, myextra=None):
     #if we don't have a filer name, let's
     #1) search for the committee by id in our db
     #2) look it up by ID in the FEC's API and import a new committee

@@ -674,7 +674,8 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
         message = lambda x: '{} column{} {} updated.'.format(x, pluralize(x), pluralize(x, 'was,were'))
         logger.info('Updating committee {} from filing {}, {}'.format(fec_id,filing,message(fields_count)),extra=myextra)
     except:
-        sys.stdout.write('failed to update committee\n')
+        logger.warning('Failed to update committee {}'.format(fec_id),
+                               extra=myextra)
 
     #add itemizations - eventually we're going to need to bulk insert here
     #skedA's

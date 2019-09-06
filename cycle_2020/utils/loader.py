@@ -744,6 +744,9 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
     filing_obj.status='ACTIVE'
     filing_obj.save()
     create_or_update_filing_status(filing, 'SUCCESS')
+    if myextra:
+        myextra['TAGS']="cnn-fec, result:success"
+    logger.info("Filing {} successfully loaded".format(filing),extra=myextra)
 
     return True
 

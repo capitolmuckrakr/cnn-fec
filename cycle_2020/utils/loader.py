@@ -727,7 +727,7 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
         return False
 
     if is_amended and amends_filing:
-        reassign_standardized_donors(filing, amends_filing)
+        reassign_standardized_donors(filing, amends_filing, myextra=myextra)
 
     #add IE total to f24s
     if filing_obj.form == 'F24':

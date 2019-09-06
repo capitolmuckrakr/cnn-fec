@@ -353,7 +353,7 @@ def reassign_standardized_donors(filing_id, amended_id, myextra=None):
 
 
 
-def clean_filing_fields(processed_filing, filing_fieldnames):
+def clean_filing_fields(processed_filing, filing_fieldnames,myextra=None):
     #check whether the filing requires adding odd-year totals
     odd_filing = None
     addons = {}

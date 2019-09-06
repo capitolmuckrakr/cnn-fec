@@ -620,7 +620,7 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
                 logger.info("SchedE transaction {} from filing {} was deactivated and status was set to COVERED because its dissemination_date is between {} and {} coverage dates of filing {}".format(f.transaction_id,f.filing_id,coverage_start_date,coverage_end_date,filing), extra=myextra)
 
 
-    clean_filing_dict = clean_filing_fields(filing_dict, filing_fieldnames)
+    clean_filing_dict = clean_filing_fields(filing_dict, filing_fieldnames, myextra=myextra)
     clean_filing_dict['filing_id'] = filing
     clean_filing_dict['filer_id'] = filing_dict['filer_committee_id_number']
     if filing_dict['form'] == 'F5':

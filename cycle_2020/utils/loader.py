@@ -505,8 +505,6 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
         if filing_matches[0].status != "FAILED":
             logger.info('filing {} already exists\n'.format(filing), extra=myextra)
             return False
-        else:
-            logger.info("Reloading {}, it failed previously\n".format(filing), extra=myextra)
     
     #filing does not exist or it failed previously
     try:
@@ -628,6 +626,7 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
     if len(filing_matches) == 1:
         filing_matches.update(**clean_filing_dict)
         filing_obj = filing_matches[0]
+        logger.info("Reloading {}, it failed previously".format(filing), extra=myextra)
     else:
         filing_obj = Filing.objects.create(**clean_filing_dict)
     filing_obj.save()

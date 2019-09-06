@@ -710,9 +710,9 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
                     sche_count += load_itemizations(ScheduleE, itemization_dict['SchE'])
                 if 'F57' in itemization_dict:
                     sche_count += load_itemizations(ScheduleE, itemization_dict['F57'])
-            sys.stdout.write("inserted {} schedule A's\n".format(scha_count))
-            sys.stdout.write("inserted {} schedule B's\n".format(schb_count))
-            sys.stdout.write("inserted {} schedule E's\n".format(sche_count))
+            logger.info("inserted {} schedule A's\n".format(scha_count), extra=myextra)
+            logger.info("inserted {} schedule B's\n".format(schb_count), extra=myextra)
+            logger.info("inserted {} schedule E's\n".format(sche_count), extra=myextra)
 
     except:
         #something failed in the transaction loading, keep the filing as failed

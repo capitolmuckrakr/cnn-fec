@@ -793,12 +793,7 @@ def load_filings(filing_dir, myextra=None):
         logger.info("Started filing {}".format(filing_id),extra=myextra)
         
 
-        if load_filing(filing_id, full_filename, filing_fieldnames):
-
-            logging.log(title="Filing {} loaded".format(filing_id),
-                    text='filing {} successfully loaded'.format(filing_id),
-                    tags=["cnn-fec", "result:success"])
-
+        if load_filing(filing_id, full_filename, filing_fieldnames, myextra=myextra):
             filings_loaded += 1
 
     if myextra:

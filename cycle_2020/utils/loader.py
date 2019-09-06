@@ -516,9 +516,9 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
     try:
         filing_dict = process_filing.process_electronic_filing(filename, dump_full=False)
     except Exception as e:
-        logging.log(title="fec2json failed",
-                    text="fec2json failed {} {}".format(filing, e),
-                    tags=["cnn-fec", "result:fail"])
+        if myextra:
+            myextra['TAGS']="cnn-fec, result:fail"
+        logger.error("fec2json failed for {}".format(filing),extra=myextra)
         return False
 
     #do not load filings outside of this cycle (these will likely be amendments of old filings)

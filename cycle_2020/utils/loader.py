@@ -646,6 +646,9 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
         filing_obj.committee_name = get_filer_name(filing_dict['filer_committee_id_number'],myextra=myextra)
         filing_obj.save()
 
+    fec_id=filing_dict['filer_committee_id_number']
+    if myextra:
+        myextra['COMMITTEE']=fec_id
     try:
         comm = Committee.objects.create(fec_id=filing_dict['filer_committee_id_number'])
         comm.save()

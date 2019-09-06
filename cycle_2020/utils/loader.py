@@ -740,7 +740,7 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
 
 
 
-    sys.stdout.write('Marking {} as ACTIVE\n'.format(filing))
+    logger.info('Marking {} as ACTIVE'.format(filing),extra=myextra)
     filing_obj.status='ACTIVE'
     filing_obj.save()
     create_or_update_filing_status(filing, 'SUCCESS')

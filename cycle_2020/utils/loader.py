@@ -560,7 +560,7 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
                     logger.info('Filing {} is an amended {} with no base. Probably from an old cycle. Not loading'.format(filing, filing_dict['form']),extra=myextra)
                     create_or_update_filing_status(filing, 'REFUSED')
                     return False
-                sys.stdout.write("could not find filing {}, which was amended by {}, so not deactivating any transactions\n".format(amends_filing, filing))
+                logger.info("could not find filing {}, which was amended by {}, so not deactivating any transactions".format(amends_filing, filing),extra=myextra)
             else:
                 #if there are filings that were amended by the amended filing
                 #they also have to be deactivated, so look for them.

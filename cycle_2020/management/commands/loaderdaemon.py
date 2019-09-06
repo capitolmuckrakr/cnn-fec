@@ -23,8 +23,6 @@ logger.setLevel(LOGLEVEL)
 
 myid=uuid.uuid4()
 
-myextra = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER}
-
 class Command(BaseCommand):
 
     def add_arguments(self, parser):
@@ -45,6 +43,8 @@ class Command(BaseCommand):
             filing_dir = options['filing_dir']
         else:
             filing_dir = 'filings/'
+            
+        myextra = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER}
 
         logger.info("looking for filings for period {}-{}".format(start_date, end_date), extra=myextra)
         filings = loader.get_filing_list(start_date, end_date, extra=myextra)

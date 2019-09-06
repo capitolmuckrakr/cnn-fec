@@ -52,7 +52,7 @@ class Command(BaseCommand):
             logger.warning("failed to find any filings for period {}-{}".format(start_date, end_date), extra=myextra)
 
         
-        #loader.download_filings(filings, filing_dir, extra=myextra)
-        #loader.load_filings(filing_dir,extra=myextra)
+        loader.download_filings(filings, filing_dir, extra=myextra)
+        loader.load_filings(filing_dir,extra=myextra)
 
 

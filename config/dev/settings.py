@@ -36,7 +36,7 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'formatter': 'verbose',
             'filename': os.path.join(
-                os.environ.get('HOME') + '/scripts/cnn-fec', 'django_errors.log'),
+                '/home/ubuntu/scripts/cnn-fec', 'django_errors.log'),
         },
     },
     'loggers': {

@@ -15,6 +15,9 @@ from cycle_2020.utils import loader
 from django.core.management.base import BaseCommand, CommandError
 
 import logging, uuid
+import systemd.daemon
+
+systemd.daemon.notify('READY=1')
 
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 SYSLOG_IDENTIFIER = os.environ.get('SYSLOG_IDENTIFIER','')

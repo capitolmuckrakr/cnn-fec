@@ -794,4 +794,5 @@ def load_filings(filing_dir, myextra=None):
     if myextra:
         myextra['FILINGS_LOADED']=filings_loaded
         myextra['TAGS']="cnn-fec, result:success"
+        _ = myextra.pop('FILING',None)
     logger.info("{} filings successfully loaded".format(filings_loaded),extra=myextra)

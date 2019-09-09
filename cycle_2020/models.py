@@ -77,7 +77,7 @@ class Committee(BaseModel):
 
     def find_committee_by_name(search_term):
         #does full text search on committee name and returns matching committees
-        query = SearchQuery(search_term)
+        query = SearchQuery(search_term, config=tsconfig)
         return Committee.objects.filter(name_search=query)
 
 

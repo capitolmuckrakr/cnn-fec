@@ -1,0 +1,20 @@
+#/etc/systemd/system/loader_daemon.service
+[Unit]
+Description=FEC filings loader daemon
+Wants=loader_daemon.timer
+After=network.target
+
+[Service]
+User=loader_daemon_service
+Type=notify
+WorkingDirectory=/home/ubuntu/scripts/cnn-fec
+Environment=PYTHONUNBUFFERED=1
+Environment=DJANGO_SETTINGS_MODULE=config.dev.settings
+Environment=LOGLEVEL=INFO
+Environment=SYSLOG_IDENTIFIER=filings_loader
+ExecStart=/home/ubuntu/.virtualenvs/fec/bin/django-admin  \
+          loaderdaemon
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

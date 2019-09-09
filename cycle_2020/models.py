@@ -26,6 +26,9 @@ STATUS_CHOICES = (('ACTIVE', 'active'),
                     ('FAILED','failed'),
                     ('WRONG_CYCLE','wrong cycle'))
 
+#declare a text search dictionary to use instead of the default dictionary
+tsconfig='pg_catalog.english'   
+
 class FilingStatus(models.Model):
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)

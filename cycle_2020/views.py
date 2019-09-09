@@ -16,6 +16,9 @@ from cycle_2020.models import *
 from cycle_2020.forms import *
 from donor.models import Donor
 
+#declare a text search dictionary to use instead of the default dictionary
+tsconfig='pg_catalog.english'
+
 class Echo:
     """An object that implements just the write method of the file-like
     interface.

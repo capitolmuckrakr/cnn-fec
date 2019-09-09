@@ -79,13 +79,13 @@ def get_contribution_results(request):
     if filing_id:
         results = results.filter(filing_id=filing_id)
     if employer:
-        query = SearchQuery(employer)
+        query = SearchQuery(employer, config=tsconfig)
         results = results.filter(occupation_search=query)
     if donor:
-        query = SearchQuery(donor)
+        query = SearchQuery(donor, config=tsconfig)
         results = results.filter(name_search=query)
     if address:
-        query = SearchQuery(address)
+        query = SearchQuery(address, config=tsconfig)
         results = results.filter(address_search=query)
     if min_date:
         results = results.filter(contribution_date__gte=min_date)
@@ -158,13 +158,13 @@ def get_expenditure_results(request):
     if filing_id:
         results = results.filter(filing_id=filing_id)
     if purpose:
-        query = SearchQuery(purpose)
+        query = SearchQuery(purpose, config=tsconfig)
         results = results.filter(purpose_search=query)
     if recipient:
-        query = SearchQuery(recipient)
+        query = SearchQuery(recipient, config=tsconfig)
         results = results.filter(name_search=query)
     if address:
-        query = SearchQuery(address)
+        query = SearchQuery(address, config=tsconfig)
         results = results.filter(address_search=query)
     if min_date:
         results = results.filter(expenditure_date__gte=min_date)
@@ -237,13 +237,13 @@ def get_ie_results(request):
     if filing_id:
         results = results.filter(filing_id=filing_id)
     if purpose:
-        query = SearchQuery(purpose)
+        query = SearchQuery(purpose, config=tsconfig)
         results = results.filter(purpose_search=query)
     if recipient:
-        query = SearchQuery(recipient)
+        query = SearchQuery(recipient, config=tsconfig)
         results = results.filter(name_search=query)
     if candidate:
-        query = SearchQuery(candidate)
+        query = SearchQuery(candidate, config=tsconfig)
         results = results.filter(candidate_search=query)
     if state:
         results = results.filter(candidate_state__iexact=state)

@@ -330,11 +330,12 @@ def top_donors(request):
     return render(request, '2020/top_donors.html', {'results':results, 'contact':settings.CONTACT, 'opts':opts})
 
 def filing_status(request, status):
-    context = {}
     status = status.upper()
-    context['filings'] = FilingStatus.objects.filter(status=status).order_by('-created')
-    context['contact'] = settings.CONTACT
-    return render(request, '2020/filing_status.html', context)
+    results = Filing.objects.filter(status=status).order_by('-created')
+    paginator = Paginator(results, 50)
+    page = request.GET.get('page')
+    results = paginator.get_page(page)
+    return render(request, '2020/filing_status.html', {'results':results, 'contact':settings.CONTACT})
 
 def committee(request, committee_id):
     context = {}

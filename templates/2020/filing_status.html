@@ -6,7 +6,14 @@
 <h1> Filing Status </h1>
 <h3> for debugging and QA </h3>
 
-<table class="table">
+<div class="row">
+{% if results %}
+ 
+<div class="page-header row">
+<div class="header-title">
+</div>
+</div>
+<table class="table table-bordered table-striped">
     <tr>
         <th> Filing number </th>
         <th> Status </th>
@@ -15,15 +22,20 @@
         <th> Raw FEC link </th>
     </tr>
 
-    {% for f in filings %}
+    {% for f in results %}
     <tr>
         <td> {{ f.filing_id }} </td>
         <td> {{ f.status }} </td>
         <td> {{ f.created }} </td>
         <td> {{ f.updated }} </td>
-        <td> <a href="{{f.csv_url}}">Download</a>
+        <td> <a href='http://docquery.fec.gov/csv/{{f.filing_id|make_list|slice:"-3:"|join:""}}/{{f.filing_id}}.csv'>Download</a>
     </tr>
     {%endfor%}
 </table>
+</div>
+
+{% include 'pagination.html' %}
+
+{% endif %}
 
 {% endblock %}

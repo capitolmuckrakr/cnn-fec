@@ -36,7 +36,7 @@ class CommitteeAdmin(admin.ModelAdmin):
 class ScheduleAAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        return qs.filter(form_type__in=['SA17A','SA17','SA11AI'], contribution_amount__gte=100000, active=True)
+        return qs.filter(form_type__in=['SA17A','SA17','SA11AI'], contribution_amount__gte=100000, active=True).exclude(contributor_organization_name__icontains='unitemized').exclude(contributor_last_name__icontains='unitemized').exclude(contributor_first_name__icontains='unitemized')
 
     def formatted_amount(self, obj):
         return '${:,.2f}'.format(obj.contribution_amount)

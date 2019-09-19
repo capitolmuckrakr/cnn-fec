@@ -15,6 +15,7 @@ class ScheduleEAdmin(admin.ModelAdmin):
         except:
             return '${:,.2f}'.format(0)
 
+    view_on_site = False
     ordering = ['-expenditure_amount']
     readonly_fields = ['committee_name',
                     'expenditure_amount',

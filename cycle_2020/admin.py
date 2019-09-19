@@ -113,6 +113,7 @@ class ScheduleAAdmin(admin.ModelAdmin):
             return obj.contributor_employer
         return ""
 
+    view_on_site = False
     ordering = ['-contribution_amount']
     list_display = ['contributor_name',
                     'donor',
@@ -142,6 +143,7 @@ class ScheduleAAdmin(admin.ModelAdmin):
     fields = readonly_fields+autocomplete_fields
 
 class CandidateAdmin(admin.ModelAdmin):
+    view_on_site = False
     search_fields = ['name']
     ordering = ('office','name')
     list_filter = ('active','office','party','state','incumbent')

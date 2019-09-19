@@ -37,6 +37,20 @@ class ScheduleEAdmin(admin.ModelAdmin):
                     'candidate_office',
                     'candidate_state',
                     'candidate_district',
+                    'support',
+                    'payee_name',
+                    'expenditure_purpose_descrip',
+                    'transaction_id',
+                    'filing_id',
+                    ]
+    search_fields = [
+                    'candidate_first_name',
+                    'candidate_last_name',
+                    'payee_first_name',
+                    'payee_last_name',
+                    'payee_organization_name',
+                    'expenditure_purpose_descrip',
+                    'filer_committee_id_number',
                     'filing_id',
                     ]
     fields = readonly_fields + ['cnn_district', 'active']

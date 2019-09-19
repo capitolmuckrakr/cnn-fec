@@ -9,6 +9,11 @@ class ScheduleEAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
+    def formatted_amount(self, obj):
+        try:
+            return '${:,.2f}'.format(obj.expenditure_amount)
+        except:
+            return '${:,.2f}'.format(0)
 
     ordering = ['-expenditure_amount']
     readonly_fields = ['committee_name',

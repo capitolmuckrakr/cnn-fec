@@ -17,6 +17,19 @@ class ScheduleEAdmin(admin.ModelAdmin):
 
     view_on_site = False
     ordering = ['-expenditure_amount']
+    list_display = ['committee_name',
+                    'support',
+                    'candidate_name',
+                    'cnn_district',
+                    'formatted_amount',
+                    'expenditure_date_formatted',
+                    ]
+    list_filter =   [
+                    'support_oppose_code',
+                    'candidate_office',
+                    'candidate_state',
+                    'candidate_district',
+                    ]
     readonly_fields = ['committee_name',
                     'expenditure_amount',
                     'candidate_first_name',

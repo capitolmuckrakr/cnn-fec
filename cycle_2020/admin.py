@@ -31,7 +31,7 @@ class ScheduleEAdmin(admin.ModelAdmin):
                     'candidate_district',
                     ]
     readonly_fields = ['committee_name',
-                    'expenditure_amount',
+                    'formatted_amount',
                     'candidate_first_name',
                     'candidate_last_name',
                     'candidate_office',

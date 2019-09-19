@@ -39,7 +39,10 @@ class ScheduleAAdmin(admin.ModelAdmin):
         return qs.filter(form_type__in=['SA17A','SA17','SA11AI'], contribution_amount__gte=100000, active=True).exclude(contributor_organization_name__icontains='unitemized').exclude(contributor_last_name__icontains='unitemized').exclude(contributor_first_name__icontains='unitemized')
 
     def formatted_amount(self, obj):
-        return '${:,.2f}'.format(obj.contribution_amount)
+        try:
+            return '${:,.2f}'.format(obj.contribution_amount)
+        except:
+            return '${:,.2f}'.format(0)
     
     def contribution_date_sorting(self, obj):
         date_str = obj.contribution_date

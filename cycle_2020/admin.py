@@ -44,6 +44,9 @@ class CommitteeAdmin(admin.ModelAdmin):
                     'committee_type',
                     'committee_designation',
                     ]
+    search_fields = ['committee_name',
+                    'fec_id',
+                    ]
     fields = readonly_fields + ['committee_name']
     
 class ScheduleAAdmin(admin.ModelAdmin):

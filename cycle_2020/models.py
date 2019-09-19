@@ -66,7 +66,7 @@ class Committee(BaseModel):
         return self.committee_name if self.committee_name else self.fec_id
     
     def get_absolute_url(self):
-        return reverse('committee_detail', args=[str(self.fec_id)])
+        return '/2020/committee/%s' % self.fec_id
 
     class Meta:
         indexes = [

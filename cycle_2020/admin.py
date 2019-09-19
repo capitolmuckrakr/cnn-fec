@@ -3,6 +3,13 @@ from cycle_2020.models import *
 import datetime
 
 class ScheduleEAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
     ordering = ['-expenditure_amount']
     readonly_fields = ['committee_name',
                     'expenditure_amount',
@@ -16,6 +23,12 @@ class ScheduleEAdmin(admin.ModelAdmin):
     fields = readonly_fields + ['cnn_district', 'active']
 
 class CommitteeAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+    
     ordering = ['committee_name']
     readonly_fields = ['fec_id',
                     'street_1',
@@ -34,6 +47,12 @@ class CommitteeAdmin(admin.ModelAdmin):
     fields = readonly_fields + ['committee_name']
     
 class ScheduleAAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+    
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.filter(form_type__in=['SA17A','SA17','SA11AI'], contribution_amount__gte=100000, active=True).exclude(contributor_organization_name__icontains='unitemized').exclude(contributor_last_name__icontains='unitemized').exclude(contributor_first_name__icontains='unitemized')

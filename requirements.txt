@@ -13,8 +13,8 @@ django-localflavor
 gunicorn
 lxml==4.3.3
 markupsafe
+mkdocs
 requests
 python-dotenv
-sphinx
 systemd-python
 uwsgi

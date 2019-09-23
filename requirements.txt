@@ -4,11 +4,17 @@ beautifulsoup4==4.7.1
 boto
 boto3
 datadog==0.21.0
+django-extensions
 django-storages
 djangorestframework
 django-pure-pagination
 django-localflavor
--e git+https://github.com/newsdev/fec2json@2312bfb088e42bf969fd332e0ecb62162f198228#egg=fec2json
+-e git+https://github.com/capitolmuckrakr/fec2json@67df445758ca4b4f81a979e3c49ba9a72b8a00f6#egg=fec2json
+gunicorn
 lxml==4.3.3
+markupsafe
 requests
 python-dotenv
+sphinx
+systemd-python
+uwsgi

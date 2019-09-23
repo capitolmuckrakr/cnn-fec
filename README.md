@@ -8,7 +8,7 @@ If you would like to update to the current version, which supports multiple cycl
 App is still kind of in the scratchpad phase, absolutely no promises that it works or I won't make breaking changes.
 
 ## About
-This app allows for importing and searching expenditures, independent expenditures and contributions from electronic FEC filings. It relies on the NYT's [fec2json](https://github.com/newsdev/fec2json) library.
+This app allows for importing and searching expenditures, independent expenditures and contributions from electronic FEC filings. It relies on a forked version of the NYT's [fec2json](https://github.com/capitolmuckrakr/fec2json) library.
 
 #### Why not just use the FEC website? 
 The FEC website has been substantially improved recently, but it still lacks several main features we desire.

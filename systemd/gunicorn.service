@@ -1,0 +1,19 @@
+#/etc/systemd/system/gunicorn.service
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/scripts/cnn-fec
+ExecStart=/home/ubuntu/.virtualenvs/fec/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          config.dev.app:application
+
+[Install]
+WantedBy=multi-user.target
+

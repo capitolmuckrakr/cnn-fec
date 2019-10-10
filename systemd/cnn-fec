@@ -1,0 +1,31 @@
+server {
+    listen 80;
+EC2IP
+    location = /favicon.ico { access_log off; log_not_found off; }
+    
+    location /static/ {
+        
+        proxy_set_header        Host 'cnn-digital-fec.s3.amazonaws.com';
+        proxy_set_header        Authorization '';
+        proxy_hide_header       x-amz-id-2;
+        proxy_hide_header       x-amz-request-id;
+        proxy_hide_header       x-amz-meta-s3cmd-attrs;
+        proxy_hide_header       Set-Cookie;
+        proxy_ignore_headers    "Set-Cookie";
+        proxy_intercept_errors  on;
+        proxy_pass              https://cnn-digital-fec.s3.amazonaws.com/apps/static/;
+        expires                 1y;
+        log_not_found           off;
+    }
+
+    location = /robots.txt {
+        add_header  Content-Type  text/plain;
+        return 200 "User-agent: *\nDisallow: /\n";
+    }
+
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}

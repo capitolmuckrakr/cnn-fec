@@ -1,6 +1,6 @@
 from fileinput import FileInput
 
-with FileInput(files=['/etc/nginx/nginx.conf'], inplace=True) as oldfile:
+with FileInput(files=['/home/ubuntu/scripts/cnn-fec/systemd/nginx.conf'], inplace=True) as oldfile:
     for line in oldfile:
         if "var/log" in line:
             line = line.replace('/var/log/nginx/','syslog:server=unix:/dev/')

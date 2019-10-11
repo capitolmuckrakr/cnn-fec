@@ -4,6 +4,7 @@ beautifulsoup4==4.7.1
 boto
 boto3
 datadog==0.21.0
+ipython
 django-extensions
 django-storages
 djangorestframework

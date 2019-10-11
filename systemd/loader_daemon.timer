@@ -1,5 +1,5 @@
 #/etc/systemd/system/loader_daemon.timer
-[UNIT]
+[Unit]
 Description=Run loader_daemon every 15 minutes
 Requires=loader_daemon.service
 

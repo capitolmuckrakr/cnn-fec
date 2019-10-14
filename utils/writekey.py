@@ -5,3 +5,6 @@ with open('/home/ubuntu/scripts/cnn-fec-dotfiles/.env','a') as oldfile:
     oldfile.write(key)
     oldfile.write("\n")
 
+with open('/home/ubuntu/scripts/cnn-fec/.env','a') as oldfile:
+    oldfile.write(key)
+    oldfile.write("\n")

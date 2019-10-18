@@ -21,6 +21,7 @@ import process_filing #this is from fec2json
 from cycle_2020.models import *
 from django.conf import settings
 from django.template.defaultfilters import pluralize
+from django.db.models.functions import Now
 
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 logger = canon_logging.getLogger('cnn-fec.'+__name__)
@@ -662,6 +663,7 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
         committee_fieldnames = [f.name for f in Committee._meta.get_fields()]
         committee = {}
         committee['zipcode'] = filing_dict['zip']
+        committee['updated'] = Now()
         fields_count = 1
         for fn in committee_fieldnames:
             try:

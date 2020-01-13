@@ -476,6 +476,14 @@ def get_filer_name(filer_id, myextra=None):
     r = requests.get(url)
     try:
         data = r.json()
+        if not isinstance(data['results'],list):
+            logger.warning('Did not receive expected type list for results in JSON from FEC site while creating committee {}'.format(filer_id),
+                                   extra=myextra)
+            return None
+        elif len(data['results']) == 0:
+            logger.warning('Empty results in JSON from FEC site while creating committee {}'.format(filer_id),
+                                   extra=myextra)
+            return None
     except:
         logger.error('Failed to download valid JSON from FEC site while creating committee {}'.format(filer_id),
                                extra=myextra)

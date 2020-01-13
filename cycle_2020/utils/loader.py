@@ -463,12 +463,14 @@ def get_filer_name(filer_id, myextra=None):
     #if we don't have a filer name, let's
     #1) search for the committee by id in our db
     #2) look it up by ID in the FEC's API and import a new committee
+    ###-- #1 search db --###
     committee = Committee.objects.filter(fec_id=filer_id)
     if len(committee) == 1 and committee[0].committee_name:
         return committee[0].committee_name
     if myextra:
         myextra=myextra.copy()
         myextra['COMMITTEE']=filer_id
+    ###-- #2 search FEC's API --###
     base_url = "https://api.open.fec.gov/v1/committee/{}/?api_key={}"
     url = base_url.format(filer_id, API_KEY)
     r = requests.get(url)

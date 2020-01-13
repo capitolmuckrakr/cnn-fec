@@ -656,6 +656,9 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
     #create or update committee
     if filing_dict.get('committee_name') is None:
         filing_obj.committee_name = get_filer_name(filing_dict['filer_committee_id_number'],myextra=myextra)
+        if not filing_obj.committee_name:
+            if clean_filing_dict.get('committee_name'):
+                filing_obj.committee_name = clean_filing_dict.get('committee_name')
         filing_obj.save()
 
     fec_id=filing_dict['filer_committee_id_number']

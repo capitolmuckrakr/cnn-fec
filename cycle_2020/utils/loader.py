@@ -685,6 +685,11 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
                 continue
             committee[fn] = field
             fields_count += 1
+            
+        if committee.get('committee_name') is None:
+            if clean_filing_dict.get('committee_name'):
+                committee['committee_name'] = clean_filing_dict.get('committee_name')
+                fields_count += 1
 
         comm = Committee.objects.filter(fec_id=filing_dict['filer_committee_id_number']).update(**committee)
         message = lambda x: '{} column{} {} updated.'.format(x, pluralize(x), pluralize(x, 'was,were'))

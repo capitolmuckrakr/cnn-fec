@@ -1,6 +1,7 @@
 filings/*
 private_data
 .env
+src/*
 
 ## Via https://github.com/github/gitignore/blob/master/Python.gitignore
 

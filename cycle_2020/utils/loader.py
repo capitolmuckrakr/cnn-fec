@@ -142,14 +142,18 @@ def filing_list_from_classic():
 
     return filings
 
-def evaluate_filing(filing):
+def evaluate_filing(filing, myextra=None):
     #determines whether filings in the API should be downloaded
+    if myextra:
+        myextra=myextra.copy()
+        myextra['FILING']=str(filing_id)
     coverage_end = filing['coverage_end_date']
     if (check_existing_filings(filing)
         and remove_bad_committees(filing)
         and check_acceptable_forms(filing)
         and check_coverage_dates(filing, coverage_end)):
             create_or_update_filing_status(filing['file_number'], 'REFUSED')
+            logger.debug("Filing {} REFUSED, skipping download from FEC site".format(filing),extra=myextra)
             return False
 
     return True

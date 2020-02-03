@@ -148,7 +148,7 @@ def evaluate_filing(filing):
     if (check_existing_filings(filing)
         and remove_bad_committees(filing)
         and check_acceptable_forms(filing)
-        and check_coverage_dates(filing, coverage_end_date)):
+        and check_coverage_dates(filing, coverage_end)):
             create_or_update_filing_status(filing['file_number'], 'REFUSED')
             return False
 

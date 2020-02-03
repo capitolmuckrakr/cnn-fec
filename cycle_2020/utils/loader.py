@@ -543,6 +543,7 @@ def load_filing(filing, filename, filing_fieldnames, myextra=None):
     if not check_coverage_dates(filing_dict, coverage_end):
         #print('Not loading filings with end date {}'.format(coverage_end))
         create_or_update_filing_status(filing, 'REFUSED')
+        logger.debug("Filing {} is outside coverage dates, REFUSED".format(filing),extra=myextra)
         return False
 
     #deal with amended filings

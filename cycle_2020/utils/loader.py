@@ -417,6 +417,7 @@ def evaluate_filing_file(filename, filing_id, myextra=None):
     if myextra:
         myextra=myextra.copy()
         myextra['FILING']=str(filing_id)
+    logger.debug("Evaluating {}.csv for loading into database".format(filing_id),extra=myextra)
     form_line =''
     with open(filename, "r") as filing_csv:
         #pop each filing open, check the filing type, and add to queue if we want this one

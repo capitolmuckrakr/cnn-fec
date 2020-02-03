@@ -813,6 +813,7 @@ def load_filings(filing_dir, myextra=None):
         full_filename = "{}{}".format(filing_dir, filename)
         
         if not evaluate_filing_file(full_filename, filing_id):
+            logger.debug("Filing {} REFUSED, not loading into database".format(filing_id),extra=myextra)
             continue
                 
         logger.info("Started filing {}".format(filing_id),extra=myextra)

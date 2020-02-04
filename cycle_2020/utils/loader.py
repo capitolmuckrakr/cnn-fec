@@ -419,10 +419,12 @@ def evaluate_filing_file(filename, filing_id, myextra=None):
         myextra['FILING']=str(filing_id)
     logger.debug("Evaluating {}.csv for loading into database".format(filing_id),extra=myextra)
     form_line =''
+    if not readable_file_check(os.path.basename(filename), myextra=myextra):
+        delete_file(filing_id, myextra=myextra)
+        return False
     with open(filename, "r") as filing_csv:
         #pop each filing open, check the filing type, and add to queue if we want this one
         reader = csv.reader(filing_csv)
-        #unreadable_files.readable_file_check('{}.csv'.format(filing_id),myextra=myextra)
         try:
             next(reader)
 #        except UnicodeDecodeError:
@@ -812,7 +814,7 @@ def load_filings(filing_dir, myextra=None):
 
         full_filename = "{}{}".format(filing_dir, filename)
         
-        if not evaluate_filing_file(full_filename, filing_id):
+        if not evaluate_filing_file(full_filename, filing_id, myextra=myextra):
             logger.debug("Filing {} REFUSED, not loading into database".format(filing_id),extra=myextra)
             continue
                 

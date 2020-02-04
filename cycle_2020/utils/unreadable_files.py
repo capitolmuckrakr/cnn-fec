@@ -24,6 +24,9 @@ def readable_file_check(file, filing_dir=filing_dir, myextra=None):
     if myextra:
         myextra=myextra.copy()
         myextra['FILING']=file.split('.')[0]
+    if not os.path.isfile(filename):
+        logger.info("File {} doesn't exist".format(filename),extra=myextra)
+        return False
     #with open(filename, errors="backslashreplace") as f:
     with open(filename) as f:
         try:

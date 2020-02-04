@@ -43,64 +43,29 @@ def readable_file_check(file, filing_dir=filing_dir, myextra=None):
                 logger.info("File {} can't be indexed".format(file),extra=myextra)
                 return False
 
-def delete_file(file, filing_dir=filing_dir, myextra=None):
-    filename = '{}{}.csv'.format(filing_dir, file)
-    if myextra:
-        myextra=myextra.copy()
-        myextra['FILING']=file.split('.')[0]
-    if os.path.isfile(filename):
-        try:
-            os.unlink(filename)
-            logger.info('{}.csv deleted'.format(file),extra=myextra)
-        except Exception as err:
-            logger.error('Error deleting {}'.format(filename),extra=myextra)
-            raise err
-    return True
+def delete_file(filing_id, filing_dir=filing_dir, myextra=None):
+    """delete a downloaded file.
 
-def reset_refused_filing_to_failed(filing_id, myextra=None):
+        Args:
+            filing_id (int): A numbered FEC filing_id, for example '123456'.
+            filing_dir (str, optional): An absolute directory path for the filing, defaults
+                to a 'filings' directory under the project root.
+
+        Returns:
+            True if the filing is deleted or it doesn't find the filing,
+                Logs details of results if LOGLEVEL has been set to 'info'. Logs deletion errors. Logs warning if the path isn't found.
+    """
+    filename = '{}{}.csv'.format(filing_dir, filing_id)
     if myextra:
         myextra=myextra.copy()
         myextra['FILING']=filing_id
-    try:
-        fs = FilingStatus.objects.filter(filing_id=filing_id)
-        if len(fs) > 0:
-            fs = fs[0]
-            if fs.status == 'REFUSED':
-                fs.status = 'FAILED'
-                fs.save()
-                logger.info('Filing {} status updated to "FAILED" from "REFUSED"'.format(filing_id),extra=myextra)
-            elif fs.status == 'SUCCESS':
-                logger.warn('Filing {} status was set to "SUCCESS", not resetting'.format(filing_id),extra=myextra)
-                return False
-            else:
-                #Do not do anything if status is "FAILED".
-                #Also in case other values are allowed in the future for FilingStatus.status 
-                return False
-        return True
-    except Exception as err:
-        logger.error("Filing {} status can't be reset".format(file),extra=myextra)
-        raise err
-
-def recheck_existing_files(filing_dir=filing_dir, myextra=None):
-    #find unreadable files, reset their status if we've refused them and delete them
-    try:
-        existing_files = sorted(os.listdir(filing_dir))
-        retry_filings = set()
-        filecounter = 0
-        for file in existing_files:
-            filecounter += 1
-            if not readable_file_check(file, filing_dir=filing_dir, myextra=myextra):
-                filing_id = file.split('.')[0]
-                if file[0] == ".":
-                    continue
-                if reset_refused_filing_to_failed(filing_id, myextra=myextra):
-                #    if delete_file(file, filing_dir=filing_dir, myextra=myextra):
-                        retry_filings.add(file.split('.')[0])
-            if filecounter % 10000 == 0:
-                logger.debug('{} of {} files, found {} unreadable files'.format(filecounter,len(existing_files),len(retry_filings)),extra=myextra)
-            if filecounter == len(existing_files):
-                logger.info('{} of {} files, found {} unreadable files'.format(filecounter,len(existing_files),len(retry_filings)),extra=myextra)
-        return retry_filings
-    except Exception as err:
-        logger.critical("File recheck failed!",extra=myextra)
-        raise err
+    if os.path.isfile(filename):
+        try:
+            os.unlink(filename)
+            logger.info('{}.csv deleted'.format(filing_id),extra=myextra)
+        except Exception as err:
+            logger.error('Error deleting {}'.format(filename),extra=myextra)
+            raise err
+    else:
+        logger.warn('Filing {} not found in {}'.format(filing_id,filing_dir),extra=myextra)
+    return True

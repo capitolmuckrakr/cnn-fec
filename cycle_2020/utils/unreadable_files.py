@@ -6,7 +6,7 @@ LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 logger = logging.getLogger("cnn-fec."+__name__)
 logger.setLevel(LOGLEVEL)
 
-filing_dir = os.environ.get('HOME') + '/scripts/cnn-fec/filings/'
+filing_dir="filings/"
 
 def readable_file_check(file, filing_dir=filing_dir, myextra=None):
     """pop open a downloaded file and flag it if it's not a readable csv.

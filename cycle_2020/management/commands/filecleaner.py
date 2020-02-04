@@ -36,7 +36,7 @@ class Command(BaseCommand):
         if options['filing_dir']:
             filing_dir = options['filing_dir']
         else:
-            filing_dir = os.environ.get('HOME') + '/scripts/cnn-fec/filings/'
+            filing_dir = 'filings/'
 
         myextra = {'MESSAGE_ID':myid,'SYSLOG_IDENTIFIER':SYSLOG_IDENTIFIER}
 

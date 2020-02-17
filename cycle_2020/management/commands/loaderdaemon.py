@@ -14,6 +14,8 @@ from cycle_2020.utils import loader
 
 from django.core.management.base import BaseCommand, CommandError
 
+from utils.date_validation import date_validation
+
 import logging, uuid
 import systemd.daemon
 
@@ -32,7 +34,7 @@ class Command(BaseCommand):
         parser.add_argument('--filing_dir',
             dest='filing_dir',
             help='where to save and read filings from')
-    #default is to do past two days
+    #default is to do past two days 
 
     def handle(self, *args, **options):
         
@@ -42,6 +44,11 @@ class Command(BaseCommand):
         start_date = unparsed_start.strftime('%Y%m%d')
         unparsed_end = datetime.datetime.now(fec_time) + datetime.timedelta(days=1)
         end_date = unparsed_end.strftime('%Y%m%d')
+
+        if date_validation(os.environ.get('STARTDATE')):
+            start_date = os.environ.get('STARTDATE')
+        if date_validation(os.environ.get('ENDDATE')):
+            end_date = os.environ.get('ENDDATE')
         if options['filing_dir']:
             filing_dir = options['filing_dir']
         else:

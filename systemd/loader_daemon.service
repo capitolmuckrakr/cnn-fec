@@ -12,6 +12,8 @@ Environment=PYTHONUNBUFFERED=1
 Environment=DJANGO_SETTINGS_MODULE=config.dev.settings
 Environment=LOGLEVEL=INFO
 Environment=SYSLOG_IDENTIFIER=filings_loader
+#Environment=STARTDATE=''
+#Environment=ENDDATE=''
 ExecStart=/home/ubuntu/.virtualenvs/fec/bin/django-admin  \
           loaderdaemon
 Restart=on-failure

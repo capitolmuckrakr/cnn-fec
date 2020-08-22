@@ -386,6 +386,8 @@ def clean_filing_fields(processed_filing, filing_fieldnames,myextra=None):
         if key in filing_fieldnames:
             if addons.get(key):
                 logger.info('adding last odd cycle total for {}'.format(key),extra=myextra)
+                if not v:
+                    v = 0
                 v = Decimal(v) + addons.get(key, Decimal(0))
             clean_filing[key] = v
 

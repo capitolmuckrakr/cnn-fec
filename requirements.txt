@@ -12,7 +12,7 @@ django-pure-pagination
 django-localflavor
 -e git+https://github.com/capitolmuckrakr/fec2json@67df445758ca4b4f81a979e3c49ba9a72b8a00f6#egg=fec2json
 gunicorn
-lxml==4.3.3
+lxml==4.6.3
 markupsafe
 mkdocs
 requests

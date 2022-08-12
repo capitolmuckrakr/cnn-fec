@@ -18,4 +18,3 @@ mkdocs
 requests
 python-dotenv
 systemd-python
-uwsgi
